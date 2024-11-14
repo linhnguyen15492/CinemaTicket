@@ -1,0 +1,146 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using App.Core.Interfaces.Services;
+using App.Core.Shared;
+using App.Core.Interfaces.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using App.Core.Entities;
+using App.Infrastructure.MySQL.Dtos;
+
+namespace App.API.Controllers
+{
+    [Route("api/theaters")]
+    [ApiController]
+    public class TheatersController : ControllerBase
+    {
+        private readonly ITheaterService _service;
+        private readonly IRepository<Theater> _repository;
+
+        public TheatersController(ITheaterService service, IRepository<Theater> repository)
+        {
+            _service = service;
+            _repository = repository;
+        }
+
+        // GET: api/Theaters
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        //[Authorize]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var result = await _service.GetAllAsync();
+
+            if (!result.IsSuccess)
+            {
+                return NotFound(ApiResponse<IEnumerable<IEntityDto>>.Failure(result.Errors!));
+            }
+            else
+            {
+                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(result.Value!));
+            }
+        }
+
+        // GET: api/Theaters/5
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var result = await _service.GetByIdAsync(id);
+
+            if (!result.IsSuccess)
+            {
+
+                return NotFound(ApiResponse<IEntityDto>.Failure(result.Errors!));
+            }
+            else
+            {
+                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+            }
+
+        }
+
+        [HttpPost]
+        [Route("create-theater")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateTheaterDto theater)
+        {
+            var result = await _service.CreateAsync(theater);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+            }
+            else
+            {
+                var res = ApiResponse<IEntityDto>.Success(result.Value!);
+                res.Messages.Add($"Item created successfully!");
+                return Ok(res);
+            }
+        }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(Roles = "Administrator, OfficeManager")]
+        public async Task<IActionResult> DeleteAsync(int id)
+        {
+            var result = await _service.DeleteAsync(id);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+            }
+            else
+            {
+                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+            }
+        }
+
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(Roles = "Administrator, OfficeManager")]
+        public async Task<IActionResult> UpdateAsync([FromBody] TheaterDto theaterDto)
+        {
+            var result = await _service.UpdateAsync(theaterDto);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+            }
+            else
+            {
+                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+            }
+        }
+
+        [HttpPost]
+        [Route("create-screening-room")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [Authorize(Roles = $"{UserRoles.Administrator}, {UserRoles.OfficeManager}")]
+        public async Task<IActionResult> CreateScreeningRoomAsync([FromBody] CreateScreeningRoomDto screeningRoomDto)
+        {
+            var result = await _service.CreateScreeningRoomAsync(screeningRoomDto);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+            }
+            else
+            {
+                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+            }
+        }
+    }
+}
