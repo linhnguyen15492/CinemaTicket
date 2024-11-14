@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string mySqlConnectionStr = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContextPool<CinemaTicketContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
+builder.Services.AddDbContext<CinemaTicketContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
 
 builder.Services.AddControllers();

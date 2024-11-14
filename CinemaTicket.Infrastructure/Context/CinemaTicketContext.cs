@@ -7,6 +7,11 @@ namespace CinemaTicket.Infrastructure.Context
     public class CinemaTicketContext : DbContext
     {
         private readonly string _connectionString = "Server=localhost; Port=3306; User ID=root; Password=123456; Database=ticket";
+
+        public CinemaTicketContext(DbContextOptions<CinemaTicketContext> options) : base(options)
+        {
+        }
+
         public DbSet<Theater> Theaters { get; set; }
         public DbSet<Showtime> Showtimes { get; set; }
         public DbSet<Movie> Movies { get; set; }
