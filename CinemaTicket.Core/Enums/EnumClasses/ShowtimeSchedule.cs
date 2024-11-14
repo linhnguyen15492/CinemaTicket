@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Core.Enums.EnumClasses
+namespace CinemaTicket.Core.Enums.EnumClasses
 {
     public class ShowtimeSchedule : BaseEnum<ShowtimeScheduleEnum>
     {

@@ -1,4 +1,4 @@
-﻿namespace App.Core.Interfaces.Repositories
+﻿namespace CinemaTicket.Core.Interfaces.Repositories
 {
     public interface ITheaterRepository { }
 }

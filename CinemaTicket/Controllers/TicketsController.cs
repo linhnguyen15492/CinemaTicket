@@ -1,9 +1,9 @@
-﻿using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Infrastructure.MySQL.Dtos;
+﻿using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Shared;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/tickets")]
     [ApiController]
@@ -25,11 +25,11 @@ namespace App.API.Controllers
             if (res.IsSuccess)
             {
 
-                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(res.Value!));
+                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
             }
             else
             {
-                return BadRequest(ApiResponse<IEnumerable<IEntityDto>>.Failure(res.Errors));
+                return BadRequest(ApiResponse<IEnumerable<IDto>>.Failure(res.Errors));
             }
         }
 

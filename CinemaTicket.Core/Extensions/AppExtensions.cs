@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using App.Core.Enums.EnumClasses;
+using CinemaTicket.Core.Enums.EnumClasses;
 using CinemaTicket.Core.Enums;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity;

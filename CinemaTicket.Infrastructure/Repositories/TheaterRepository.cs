@@ -1,6 +1,6 @@
-﻿using App.Core.Entities;
-using App.Core.Interfaces.Repositories;
-using App.Infrastructure.Repositories.Generics;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Infrastructure.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infrastructure.Repositories
+namespace CinemaTicket.Infrastructure.Repositories
 {
     public class TheaterRepository : GenericRepository<Theater>, ITheaterRepository
     {

@@ -1,15 +1,12 @@
-﻿using App.Core.Domain.Dtos;
-using App.Core.Domain.Entities.eShop;
-using App.Core.Entities;
-using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
-using App.Core.Mappers;
-using App.Core.Shared;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Mappers;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace App.Infrastructure.Services
+namespace CinemaTicket.Infrastructure.Services
 {
     public class TheaterService : ITheaterService
     {
@@ -22,7 +19,7 @@ namespace App.Infrastructure.Services
             _screeningRoomRepository = screeningRoomRepository;
         }
 
-        public async Task<Result<IEntityDto>> CreateAsync(IEntityDto t)
+        public async Task<Result<IDto>> CreateAsync(IDto t)
         {
             var theaterDto = t as CreateTheaterDto;
 
@@ -30,17 +27,17 @@ namespace App.Infrastructure.Services
             {
                 var res = await _theaterRepository.AddAsync(theaterDto!.ToTheater());
 
-                return Result<IEntityDto>.Success(t);
+                return Result<IDto>.Success(t);
 
             }
             catch (Exception e)
             {
-                return Result<IEntityDto>.Failure(e.Message);
+                return Result<IDto>.Failure(e.Message);
             }
 
         }
 
-        public async Task<Result<IEntityDto>> CreateScreeningRoomAsync(IEntityDto screeningRoomDto)
+        public async Task<Result<IDto>> CreateScreeningRoomAsync(IDto screeningRoomDto)
         {
             var dto = screeningRoomDto as CreateScreeningRoomDto;
 
@@ -48,7 +45,7 @@ namespace App.Infrastructure.Services
 
             if (theater == null)
             {
-                return Result<IEntityDto>.Failure("Theater not found");
+                return Result<IDto>.Failure("Theater not found");
             }
             else
             {
@@ -59,16 +56,16 @@ namespace App.Infrastructure.Services
 
                 if (result == null)
                 {
-                    return Result<IEntityDto>.Failure("Theater not found");
+                    return Result<IDto>.Failure("Theater not found");
                 }
                 else
                 {
-                    return Result<IEntityDto>.Success(result.ToTheaterDto());
+                    return Result<IDto>.Success(result.ToTheaterDto());
                 }
             }
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> SearchAsync(object queryObject)
+        public async Task<Result<IEnumerable<IDto>>> SearchAsync(object queryObject)
         {
             var query = queryObject as string;
 
@@ -83,7 +80,7 @@ namespace App.Infrastructure.Services
 
                 if (p.Count == 0)
                 {
-                    return Result<IEnumerable<IEntityDto>>.Failure("Not found");
+                    return Result<IEnumerable<IDto>>.Failure("Not found");
                 }
                 else
                 {
@@ -94,26 +91,26 @@ namespace App.Infrastructure.Services
                         Location = t.Location,
                     });
 
-                    return Result<IEnumerable<IEntityDto>>.Success(data);
+                    return Result<IEnumerable<IDto>>.Success(data);
                 }
             }
             catch (Exception ex)
             {
-                return Result<IEnumerable<IEntityDto>>.Failure(ex.Message);
+                return Result<IEnumerable<IDto>>.Failure(ex.Message);
             }
         }
 
-        public Task<Result<IEntityDto>> UpdateAsync(IEntityDto t)
+        public Task<Result<IDto>> UpdateAsync(IDto t)
         {
             throw new NotImplementedException();
         }
 
-        Task<Result<IEntityDto>> IService<IEntityDto>.DeleteAsync(int id)
+        Task<Result<IDto>> IService<IDto>.DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> GetAllAsync()
+        public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
             try
             {
@@ -123,15 +120,15 @@ namespace App.Infrastructure.Services
 
                 var res = data.Where(t => t.IsDeleted == false).Select(t => t.ToTheaterDto()).ToList();
 
-                return Result<IEnumerable<IEntityDto>>.Success(res);
+                return Result<IEnumerable<IDto>>.Success(res);
             }
             catch (Exception ex)
             {
-                return Result<IEnumerable<IEntityDto>>.Failure(ex.Message);
+                return Result<IEnumerable<IDto>>.Failure(ex.Message);
             }
         }
 
-        public async Task<Result<IEntityDto?>> GetByIdAsync(int id)
+        public async Task<Result<IDto?>> GetByIdAsync(int id)
         {
             try
             {
@@ -139,18 +136,18 @@ namespace App.Infrastructure.Services
 
                 if (res == null)
                 {
-                    return Result<IEntityDto?>.Failure("Not found");
+                    return Result<IDto?>.Failure("Not found");
                 }
                 else
                 {
 
-                    return Result<IEntityDto?>.Success(res.ToTheaterDto());
+                    return Result<IDto?>.Success(res.ToTheaterDto());
                 };
 
             }
             catch (Exception ex)
             {
-                return Result<IEntityDto?>.Failure(ex.Message);
+                return Result<IDto?>.Failure(ex.Message);
             }
         }
     }

@@ -1,20 +1,20 @@
-﻿using App.Core.Authentication;
-using App.Core.Configurations;
-using App.Core.Domain.Dtos;
-using App.Core.Entities;
-using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
-using App.Core.Mappers;
-using App.Core.Shared;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Mappers;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using CinemaTicket.Core.Configurations;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
 
-namespace App.Infrastructure.Services
+namespace CinemaTicket.Infrastructure.Services
 {
     public class AccountService : IAccountService<ApplicationUserDto>
     {

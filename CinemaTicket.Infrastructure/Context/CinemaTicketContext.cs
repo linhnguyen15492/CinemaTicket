@@ -1,6 +1,5 @@
-﻿using App.Core.Entities;
-using App.Core.Enums.EnumClasses;
-using CinemaTicket.Core.Entities;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Enums.EnumClasses;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaTicket.Infrastructure.Context
@@ -8,10 +7,6 @@ namespace CinemaTicket.Infrastructure.Context
     public class CinemaTicketContext : DbContext
     {
         private readonly string _connectionString = "Server=localhost; Port=3306; User ID=root; Password=123456; Database=ticket";
-
-        public DbSet<Author> Authors { get; set; }
-        public DbSet<Post> Posts { get; set; }
-
         public DbSet<Theater> Theaters { get; set; }
         public DbSet<Showtime> Showtimes { get; set; }
         public DbSet<Movie> Movies { get; set; }

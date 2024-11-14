@@ -1,12 +1,12 @@
-﻿using App.Core.Domain.Dtos;
-using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
-using App.Core.Shared;
+﻿using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Shared;
 using Microsoft.EntityFrameworkCore;
-using App.Core.Mappers;
-using App.Core.Entities;
+using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Mappers;
+using CinemaTicket.Core.Dtos;
 
-namespace App.Infrastructure.Services
+namespace CinemaTicket.Infrastructure.Services
 {
     public class TicketService : ITicketService
     {
@@ -17,22 +17,22 @@ namespace App.Infrastructure.Services
             _repository = repository;
         }
 
-        public Task<Result<IEntityDto>> CreateAsync(IEntityDto t)
+        public Task<Result<IDto>> CreateAsync(IDto t)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEntityDto>> UpdateAsync(IEntityDto t)
+        public Task<Result<IDto>> UpdateAsync(IDto t)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEntityDto>> DeleteAsync(int id)
+        public Task<Result<IDto>> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> GetAllAsync()
+        public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
             var res = await _repository.GetAll().Include(t => t.Showtime)
                                     .ThenInclude(s => s.Movie)
@@ -45,20 +45,20 @@ namespace App.Infrastructure.Services
 
             if (res is null)
             {
-                return Result<IEnumerable<IEntityDto>>.Failure("No ticket found!");
+                return Result<IEnumerable<IDto>>.Failure("No ticket found!");
             }
             else
             {
-                return Result<IEnumerable<IEntityDto>>.Success(res.Select(t => t.ToTicketBookingDto()));
+                return Result<IEnumerable<IDto>>.Success(res.Select(t => t.ToTicketBookingDto()));
             }
         }
 
-        public Task<Result<IEntityDto?>> GetByIdAsync(int id)
+        public Task<Result<IDto?>> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEnumerable<IEntityDto>>> SearchAsync(object queryObject)
+        public Task<Result<IEnumerable<IDto>>> SearchAsync(object queryObject)
         {
             throw new NotImplementedException();
         }

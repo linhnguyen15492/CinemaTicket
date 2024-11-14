@@ -1,12 +1,12 @@
-﻿using App.Core.Authentication;
-using App.Core.Entities;
-using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Infrastructure.MySQL.Dtos;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Models;
+using CinemaTicket.Core.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/account")]
     [ApiController]

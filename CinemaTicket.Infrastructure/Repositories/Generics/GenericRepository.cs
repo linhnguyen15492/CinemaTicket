@@ -1,8 +1,8 @@
-﻿using App.Core.Interfaces.Repositories;
+﻿using CinemaTicket.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace App.Infrastructure.Repositories.Generics
+namespace CinemaTicket.Infrastructure.Repositories.Generics
 {
     public class GenericRepository<T> : IRepository<T> where T : class
     {

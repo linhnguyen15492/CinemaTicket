@@ -1,4 +1,4 @@
-﻿namespace App.Core.Interfaces.Services;
+﻿namespace CinemaTicket.Core.Interfaces.Services;
 
 public interface IGenericService<T> where T : class
 {

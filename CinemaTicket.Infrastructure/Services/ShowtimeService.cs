@@ -1,13 +1,13 @@
-﻿using App.Core.Domain.Dtos;
-using App.Core.Entities;
-using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
-using App.Core.Mappers;
-using App.Core.Shared;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace App.Infrastructure.Services
+namespace CinemaTicket.Infrastructure.Services
 {
     public class ShowtimeService : IShowtimeService
     {
@@ -18,7 +18,7 @@ namespace App.Infrastructure.Services
             _repository = repository;
         }
 
-        public async Task<Result<IEntityDto>> CreateAsync(IEntityDto t)
+        public async Task<Result<IDto>> CreateAsync(IDto t)
         {
             try
             {
@@ -28,49 +28,49 @@ namespace App.Infrastructure.Services
 
                 if (result is null)
                 {
-                    return Result<IEntityDto>.Failure("Fail to create showtime");
+                    return Result<IDto>.Failure("Fail to create showtime");
                 }
                 else
                 {
-                    return Result<IEntityDto>.Success(t);
+                    return Result<IDto>.Success(t);
                 }
             }
             catch (Exception ex)
             {
-                return Result<IEntityDto>.Failure(ex.Message);
+                return Result<IDto>.Failure(ex.Message);
             }
         }
 
-        public Task<Result<IEntityDto>> UpdateAsync(IEntityDto t)
+        public Task<Result<IDto>> UpdateAsync(IDto t)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> GetAllAsync()
+        public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
             var result = await _repository.GetAllAsync();
 
             if (result is null)
             {
-                return Result<IEnumerable<IEntityDto>>.Failure("No showtime found!");
+                return Result<IEnumerable<IDto>>.Failure("No showtime found!");
             }
             else
             {
-                return Result<IEnumerable<IEntityDto>>.Success(result.Select(s => s.ToShowtimeDto()));
+                return Result<IEnumerable<IDto>>.Success(result.Select(s => s.ToShowtimeDto()));
             }
         }
 
-        public async Task<Result<IEntityDto?>> GetByIdAsync(int id)
+        public async Task<Result<IDto?>> GetByIdAsync(int id)
         {
             var res = await _repository.GetByIdAsync(id);
 
             if (res is null)
             {
-                return Result<IEntityDto?>.Failure("Showtime not found!");
+                return Result<IDto?>.Failure("Showtime not found!");
 
             }
 
-            return Result<IEntityDto?>.Success(res.ToShowtimeDto());
+            return Result<IDto?>.Success(res.ToShowtimeDto());
         }
 
         private async Task<Showtime?> GetShowtimeByIdAsync(int id)
@@ -85,7 +85,7 @@ namespace App.Infrastructure.Services
             return res;
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> SearchAsync(object queryObject)
+        public async Task<Result<IEnumerable<IDto>>> SearchAsync(object queryObject)
         {
             var req = queryObject as ShowtimeQuery;
 
@@ -112,10 +112,10 @@ namespace App.Infrastructure.Services
 
             var res = await query.Select(s => s.ToShowtimeDto()).ToListAsync();
 
-            return Result<IEnumerable<IEntityDto>>.Success(res);
+            return Result<IEnumerable<IDto>>.Success(res);
         }
 
-        public Task<Result<IEntityDto>> DeleteAsync(int id)
+        public Task<Result<IDto>> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }

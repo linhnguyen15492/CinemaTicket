@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using CinemaTicket.Core.Enums;
 
-namespace App.Core.Enums.EnumClasses
+namespace CinemaTicket.Core.Enums.EnumClasses
 {
     public class BookingStatus : BaseEnum<BookingStatusEnum>
     {

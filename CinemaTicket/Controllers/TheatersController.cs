@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using App.Core.Entities;
-using App.Infrastructure.MySQL.Dtos;
+using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Dtos;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/theaters")]
     [ApiController]
@@ -32,11 +32,11 @@ namespace App.API.Controllers
 
             if (!result.IsSuccess)
             {
-                return NotFound(ApiResponse<IEnumerable<IEntityDto>>.Failure(result.Errors!));
+                return NotFound(ApiResponse<IEnumerable<IDto>>.Failure(result.Errors!));
             }
             else
             {
-                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(result.Value!));
+                return Ok(ApiResponse<IEnumerable<IDto>>.Success(result.Value!));
             }
         }
 
@@ -51,11 +51,11 @@ namespace App.API.Controllers
             if (!result.IsSuccess)
             {
 
-                return NotFound(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return NotFound(ApiResponse<IDto>.Failure(result.Errors!));
             }
             else
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+                return Ok(ApiResponse<IDto>.Success(result.Value!));
             }
 
         }
@@ -72,11 +72,11 @@ namespace App.API.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
             else
             {
-                var res = ApiResponse<IEntityDto>.Success(result.Value!);
+                var res = ApiResponse<IDto>.Success(result.Value!);
                 res.Messages.Add($"Item created successfully!");
                 return Ok(res);
             }
@@ -94,11 +94,11 @@ namespace App.API.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
             else
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+                return Ok(ApiResponse<IDto>.Success(result.Value!));
             }
         }
 
@@ -114,11 +114,11 @@ namespace App.API.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
             else
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+                return Ok(ApiResponse<IDto>.Success(result.Value!));
             }
         }
 
@@ -135,11 +135,11 @@ namespace App.API.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
             else
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+                return Ok(ApiResponse<IDto>.Success(result.Value!));
             }
         }
     }

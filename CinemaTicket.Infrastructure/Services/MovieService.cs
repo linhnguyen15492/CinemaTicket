@@ -1,13 +1,13 @@
-﻿using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Core.Mappers;
+﻿using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Shared;
 using Microsoft.EntityFrameworkCore;
-using App.Core.Entities;
-using App.Infrastructure.Dtos;
+using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Mappers;
 
 
-namespace App.Infrastructure.Services
+namespace CinemaTicket.Infrastructure.Services
 {
     public class MovieService : IMovieService
     {
@@ -19,27 +19,27 @@ namespace App.Infrastructure.Services
         }
 
 
-        public async Task<Result<IEntityDto>> CreateAsync(IEntityDto t)
+        public async Task<Result<IDto>> CreateAsync(IDto t)
         {
             var movieDto = t as CreateMovieDto;
             var res = await _repository.AddAsync(movieDto!.ToMovie());
 
             if (res is not null)
             {
-                return Result<IEntityDto>.Success(t);
+                return Result<IDto>.Success(t);
             }
             else
             {
-                return Result<IEntityDto>.Failure("Fail to create movie");
+                return Result<IDto>.Failure("Fail to create movie");
             }
         }
 
-        public Task<Result<IEntityDto>> DeleteAsync(int id)
+        public Task<Result<IDto>> DeleteAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<Result<IEnumerable<IEntityDto>>> GetAllAsync()
+        public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
             try
             {
@@ -47,35 +47,35 @@ namespace App.Infrastructure.Services
 
                 var data = movies.Select(m => m.ToMovieDto());
 
-                return Result<IEnumerable<IEntityDto>>.Success(data);
+                return Result<IEnumerable<IDto>>.Success(data);
 
             }
             catch (Exception ex)
             {
-                return Result<IEnumerable<IEntityDto>>.Failure(ex.Message);
+                return Result<IEnumerable<IDto>>.Failure(ex.Message);
             }
         }
 
-        public async Task<Result<IEntityDto?>> GetByIdAsync(int id)
+        public async Task<Result<IDto?>> GetByIdAsync(int id)
         {
             var movie = await GetMovieByIdAsync(id);
 
             if (movie is not null)
             {
-                return Result<IEntityDto?>.Success(movie.ToMovieDto());
+                return Result<IDto?>.Success(movie.ToMovieDto());
             }
             else
             {
-                return Result<IEntityDto?>.Failure("Movie not found");
+                return Result<IDto?>.Failure("Movie not found");
             }
         }
 
-        public Task<Result<IEnumerable<IEntityDto>>> SearchAsync(object queryObject)
+        public Task<Result<IEnumerable<IDto>>> SearchAsync(object queryObject)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Result<IEntityDto>> UpdateAsync(IEntityDto t)
+        public Task<Result<IDto>> UpdateAsync(IDto t)
         {
             throw new NotImplementedException();
         }

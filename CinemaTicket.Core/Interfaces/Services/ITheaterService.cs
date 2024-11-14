@@ -1,9 +1,10 @@
-﻿using App.Core.Shared;
+﻿using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Shared;
 
-namespace App.Core.Interfaces.Services
+namespace CinemaTicket.Core.Interfaces.Services
 {
-    public interface ITheaterService : IService<IEntityDto>
+    public interface ITheaterService : IService<IDto>
     {
-        Task<Result<IEntityDto>> CreateScreeningRoomAsync(IEntityDto screeningRoomDto);
+        Task<Result<IDto>> CreateScreeningRoomAsync(IDto screeningRoomDto);
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace App.Core.Interfaces.Services
+﻿using CinemaTicket.Core.Dtos;
+
+namespace CinemaTicket.Core.Interfaces.Services
 {
-    public interface IShowtimeService : IService<IEntityDto>
+    public interface IShowtimeService : IService<IDto>
     {
     }
 }

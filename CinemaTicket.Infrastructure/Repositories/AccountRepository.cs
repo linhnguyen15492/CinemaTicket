@@ -1,5 +1,5 @@
-﻿using App.Core.Authentication;
-using App.Core.Interfaces.Repositories;
+﻿using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infrastructure.Repositories
+namespace CinemaTicket.Infrastructure.Repositories
 {
     public class AccountRepository : IAccountRepository
     {

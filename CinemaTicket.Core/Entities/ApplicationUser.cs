@@ -1,4 +1,4 @@
-﻿using App.Core.Enums.EnumClasses;
+﻿using CinemaTicket.Core.Enums.EnumClasses;
 using CinemaTicket.Core.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;

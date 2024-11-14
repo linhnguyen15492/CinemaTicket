@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using App.Core.Interfaces.Services;
-using App.Infrastructure.Context;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Infrastructure.Context;
 using Microsoft.AspNetCore.Identity;
-using App.Core.Entities;
-using App.Core.Enums;
+using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Enums;
 
-namespace App.Infrastructure.Services.SeedData
+namespace CinemaTicket.Infrastructure.Services.SeedData
 {
     public class SeedDataService : ISeedDataService
     {
-        private readonly TicketBookingContext _context;
+        private readonly CinemaTicketContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public Queue<string> Messages { get; set; } = new Queue<string>();
 
-        public SeedDataService(TicketBookingContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public SeedDataService(CinemaTicketContext context, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _roleManager = roleManager;

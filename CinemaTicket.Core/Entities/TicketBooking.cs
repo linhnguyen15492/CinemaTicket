@@ -1,8 +1,7 @@
-﻿using App.Core.Enums.EnumClasses;
-using CinemaTicket.Core.Entities;
+﻿using CinemaTicket.Core.Enums.EnumClasses;
 using CinemaTicket.Core.Enums;
 
-namespace App.Core.Entities
+namespace CinemaTicket.Core.Entities
 {
     public class TicketBooking : BaseEntity
     {

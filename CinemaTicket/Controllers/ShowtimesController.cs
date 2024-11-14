@@ -1,12 +1,12 @@
-﻿using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Infrastructure.MySQL.Dtos;
-using App.Infrastructure.MySQL.Services;
+﻿using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/showtimes")]
     [ApiController]
@@ -26,11 +26,11 @@ namespace App.API.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(res.Value!));
+                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
             }
             else
             {
-                return NotFound(ApiResponse<IEnumerable<IEntityDto>>.Failure("No showtime found!"));
+                return NotFound(ApiResponse<IEnumerable<IDto>>.Failure("No showtime found!"));
             }
         }
 
@@ -52,18 +52,18 @@ namespace App.API.Controllers
                     }
                 }
 
-                return BadRequest(ApiResponse<IEntityDto>.Failure(errors.ToArray()));
+                return BadRequest(ApiResponse<IDto>.Failure(errors.ToArray()));
             }
 
             var result = await _service.CreateAsync(createShowtimeDto);
 
             if (result.IsSuccess)
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!));
+                return Ok(ApiResponse<IDto>.Success(result.Value!));
             }
             else
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
         }
 
@@ -74,11 +74,11 @@ namespace App.API.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEntityDto>.Success(res.Value!));
+                return Ok(ApiResponse<IDto>.Success(res.Value!));
             }
             else
             {
-                return NotFound(ApiResponse<IEntityDto>.Failure("Not found"));
+                return NotFound(ApiResponse<IDto>.Failure("Not found"));
             }
         }
 
@@ -100,7 +100,7 @@ namespace App.API.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(res.Value!));
+                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
             }
 
 

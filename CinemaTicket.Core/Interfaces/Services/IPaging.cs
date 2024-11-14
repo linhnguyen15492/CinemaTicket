@@ -1,6 +1,6 @@
-﻿using App.Core.Shared;
+﻿using CinemaTicket.Core.Shared;
 
-namespace App.Core.Interfaces.Services
+namespace CinemaTicket.Core.Interfaces.Services
 {
     public interface IPaging<T> where T : class
     {

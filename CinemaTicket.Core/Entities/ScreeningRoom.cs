@@ -1,4 +1,4 @@
-﻿using App.Core.Enums.EnumClasses;
+﻿using CinemaTicket.Core.Enums.EnumClasses;
 using CinemaTicket.Core.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

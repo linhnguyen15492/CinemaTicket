@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace App.Core.Interfaces.Repositories
+namespace CinemaTicket.Core.Interfaces.Repositories
 {
     public interface IRepository<T> where T : class
     {

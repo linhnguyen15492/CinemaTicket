@@ -1,7 +1,7 @@
-﻿using App.Core.Authentication;
+﻿using CinemaTicket.Core.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace App.Core.Interfaces.Repositories
+namespace CinemaTicket.Core.Interfaces.Repositories
 {
     public interface IAccountRepository
     {

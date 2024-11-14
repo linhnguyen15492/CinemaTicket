@@ -1,5 +1,5 @@
-﻿using App.Core.Entities;
-using App.Infrastructure.Repositories.Generics;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Infrastructure.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App.Infrastructure.Repositories
+namespace CinemaTicket.Infrastructure.Repositories
 {
     public class ScreeningRoomRepository : GenericRepository<ScreeningRoom>
     {

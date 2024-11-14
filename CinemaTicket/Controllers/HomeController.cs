@@ -1,21 +1,20 @@
-﻿using App.Core.Entities;
-using App.Core.Interfaces.Services;
-using App.Infrastructure.MySQL.DB;
-using App.Infrastructure.MySQL.Services.SeedData;
+﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Infrastructure.Context;
+using CinemaTicket.Infrastructure.Services.SeedData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase
     {
         private readonly ISeedDataService _seeder;
-        private readonly TicketBookingContext _context;
+        private readonly CinemaTicketContext _context;
 
-        public HomeController(TicketBookingContext context, ISeedDataService seeder, RoleManager<IdentityRole> roleManager,
+        public HomeController(CinemaTicketContext context, ISeedDataService seeder, RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager)
         {
             _seeder = new SeedDataService(context, roleManager, userManager);

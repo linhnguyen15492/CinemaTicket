@@ -1,7 +1,6 @@
-﻿using CinemaTicket.Core.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace App.Core.Entities
+namespace CinemaTicket.Core.Entities
 {
     public class TicketBookingDetail : BaseEntity
     {

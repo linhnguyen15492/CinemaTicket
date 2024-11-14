@@ -1,6 +1,6 @@
-﻿using App.Core.Entities;
+﻿using CinemaTicket.Core.Entities;
 
-namespace App.Core.Interfaces.Repositories
+namespace CinemaTicket.Core.Interfaces.Repositories
 {
     public interface IMovieRepository
     {

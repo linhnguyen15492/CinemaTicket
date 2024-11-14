@@ -1,4 +1,4 @@
-﻿namespace App.Core.Entities
+﻿namespace CinemaTicket.Core.Entities
 {
     public static class UserRoles
     {

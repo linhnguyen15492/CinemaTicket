@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using App.Core.Interfaces.Services;
-using App.Core.Shared;
-using App.Infrastructure.MySQL.Dtos;
+using CinemaTicket.Core.Interfaces.Services;
+using CinemaTicket.Core.Shared;
+using CinemaTicket.Core.Dtos;
 
-namespace App.API.Controllers
+namespace CinemaTicket.Controllers
 {
     [Route("api/movies")]
     [ApiController]
@@ -23,11 +23,11 @@ namespace App.API.Controllers
             var res = await _service.GetAllAsync();
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IEntityDto>>.Success(res.Value!, "Get all movies success"));
+                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!, "Get all movies success"));
             }
             else
             {
-                return BadRequest(ApiResponse<IEnumerable<IEntityDto>>.Failure(res.Errors!));
+                return BadRequest(ApiResponse<IEnumerable<IDto>>.Failure(res.Errors!));
             }
         }
 
@@ -41,11 +41,11 @@ namespace App.API.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEntityDto>.Success(res.Value!, "Get movie by id success"));
+                return Ok(ApiResponse<IDto>.Success(res.Value!, "Get movie by id success"));
             }
             else
             {
-                return NotFound(ApiResponse<IEntityDto>.Failure(res.Errors!));
+                return NotFound(ApiResponse<IDto>.Failure(res.Errors!));
             }
         }
 
@@ -59,11 +59,11 @@ namespace App.API.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(ApiResponse<IEntityDto>.Success(result.Value!, "Create movies success"));
+                return Ok(ApiResponse<IDto>.Success(result.Value!, "Create movies success"));
             }
             else
             {
-                return BadRequest(ApiResponse<IEntityDto>.Failure(result.Errors!));
+                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
             }
         }
     }

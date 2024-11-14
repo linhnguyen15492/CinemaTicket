@@ -1,7 +1,7 @@
-﻿using App.Core.Interfaces.Repositories;
-using App.Core.Interfaces.Services;
+﻿using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Core.Interfaces.Services;
 
-namespace App.Infrastructure.Services.Generics
+namespace CinemaTicket.Infrastructure.Services.Generics
 {
     public class GenericService<T> : IGenericService<T> where T : class
     {
