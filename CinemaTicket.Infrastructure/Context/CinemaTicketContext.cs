@@ -1,10 +1,11 @@
 ﻿using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Enums.EnumClasses;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaTicket.Infrastructure.Context
 {
-    public class CinemaTicketContext : DbContext
+    public class CinemaTicketContext : IdentityDbContext<ApplicationUser>
     {
         private readonly string _connectionString = "Server=localhost; Port=3306; User ID=root; Password=123456; Database=ticket";
 
@@ -12,18 +13,18 @@ namespace CinemaTicket.Infrastructure.Context
         {
         }
 
-        public DbSet<Theater> Theaters { get; set; }
-        public DbSet<Showtime> Showtimes { get; set; }
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<ScreeningRoom> ScreeningRooms { get; set; }
-        public DbSet<TicketBooking> TicketBookings { get; set; }
-        public DbSet<TicketBookingDetail> TicketBookingDetails { get; set; }
-        public DbSet<BookingStatus> BookingStatus { get; set; }
-        public DbSet<MovieStatus> MovieStatuses { get; set; }
-        public DbSet<ScreeningRoomType> ScreeningRoomTypes { get; set; }
-        public DbSet<ShowtimeSchedule> ShowtimeSchedules { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<CinemaSeat> CinemaSeats { get; set; }
+        public required DbSet<Theater> Theaters { get; set; }
+        public required DbSet<Showtime> Showtimes { get; set; }
+        public required DbSet<Movie> Movies { get; set; }
+        public required DbSet<ScreeningRoom> ScreeningRooms { get; set; }
+        public required DbSet<TicketBooking> TicketBookings { get; set; }
+        public required DbSet<TicketBookingDetail> TicketBookingDetails { get; set; }
+        public required DbSet<BookingStatus> BookingStatus { get; set; }
+        public required DbSet<MovieStatus> MovieStatuses { get; set; }
+        public required DbSet<ScreeningRoomType> ScreeningRoomTypes { get; set; }
+        public required DbSet<ShowtimeSchedule> ShowtimeSchedules { get; set; }
+        public required DbSet<Department> Departments { get; set; }
+        public required DbSet<CinemaSeat> CinemaSeats { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
