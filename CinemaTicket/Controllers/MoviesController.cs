@@ -18,16 +18,18 @@ namespace CinemaTicket.Controllers
 
         // GET: api/Movies
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAllAsync()
         {
             var res = await _service.GetAllAsync();
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!, "Get all movies success"));
+                return Ok((IEnumerable<MovieDto>)res.Value!);
             }
             else
             {
-                return BadRequest(ApiResponse<IEnumerable<IDto>>.Failure(res.Errors!));
+                return BadRequest(res.Errors!);
             }
         }
 

@@ -7,11 +7,14 @@ namespace CinemaTicket.Core.Dtos
         public DateOnly Date { get; set; }
         public int SccreeningRoomId { get; set; }
         public string ScreeningRoomType { get; set; } = string.Empty;
+
         public int ShowtimeScheduleId { get; set; }
         public string ShowtimeSchedule { get; set; } = string.Empty;
         public int MovieId { get; set; }
         public string MovieTitle { get; set; } = string.Empty;
         public double Price { get; set; }
+        public int TheaterId { get; set; }
+        public string TheaterName { get; set; } = string.Empty;
     }
 
     public class CreateShowtimeDto : IDto

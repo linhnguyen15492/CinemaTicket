@@ -20,17 +20,19 @@ namespace CinemaTicket.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllAsync()
         {
             var res = await _service.GetAllAsync();
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
+                return Ok((IEnumerable<ShowtimeDto>)(res.Value!));
             }
             else
             {
-                return NotFound(ApiResponse<IEnumerable<IDto>>.Failure("No showtime found!"));
+                return NotFound("No showtime found!");
             }
         }
 

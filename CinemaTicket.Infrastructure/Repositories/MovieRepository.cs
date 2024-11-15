@@ -1,5 +1,6 @@
 ﻿using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Infrastructure.Context;
 using CinemaTicket.Infrastructure.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ namespace CinemaTicket.Infrastructure.Repositories
 {
     public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
-        public MovieRepository(DbContext context) : base(context) { }
+        public MovieRepository(CinemaTicketContext context) : base(context) { }
 
         public override async Task<IEnumerable<Movie>> GetAllAsync()
         {

@@ -1,7 +1,17 @@
+using CinemaTicket.Web.Interfaces;
+using CinemaTicket.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var baseUrl = "http://localhost:5073/api/";
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<MovieService>(provider => new MovieService(baseUrl));
+builder.Services.AddScoped<ShowtimeService>(provider => new ShowtimeService(baseUrl));
+
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

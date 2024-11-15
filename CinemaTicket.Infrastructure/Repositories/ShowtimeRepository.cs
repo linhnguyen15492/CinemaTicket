@@ -1,5 +1,6 @@
 ﻿using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Interfaces.Repositories;
+using CinemaTicket.Infrastructure.Context;
 using CinemaTicket.Infrastructure.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +8,7 @@ namespace CinemaTicket.Infrastructure.Repositories
 {
     public class ShowtimeRepository : GenericRepository<Showtime>, IShowtimeRepository
     {
-        public ShowtimeRepository(DbContext context) : base(context)
+        public ShowtimeRepository(CinemaTicketContext context) : base(context)
         {
 
         }
@@ -16,9 +17,9 @@ namespace CinemaTicket.Infrastructure.Repositories
         {
             return await _dbSet.Include(s => s.Movie)
                                 .Include(s => s.ScreeningRoom)
-                                    .ThenInclude(s => s.Theater)
+                                    .ThenInclude(s => s!.Theater)
                                 .Include(s => s.ScreeningRoom)
-                                    .ThenInclude(s => s.ScreeningRoomType)
+                                    .ThenInclude(s => s!.ScreeningRoomType)
                                 .Include(s => s.ShowtimeSchedule)
                                 .ToListAsync();
         }
@@ -28,9 +29,9 @@ namespace CinemaTicket.Infrastructure.Repositories
             return await _dbSet.Where(s => s.Id == id)
                                 .Include(s => s.Movie)
                                 .Include(s => s.ScreeningRoom)
-                                    .ThenInclude(s => s.Theater)
+                                    .ThenInclude(s => s!.Theater)
                                 .Include(s => s.ScreeningRoom)
-                                    .ThenInclude(s => s.ScreeningRoomType)
+                                    .ThenInclude(s => s!.ScreeningRoomType)
                                 .Include(s => s.ShowtimeSchedule)
                                 .FirstOrDefaultAsync();
         }

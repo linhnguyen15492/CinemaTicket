@@ -32,11 +32,11 @@ namespace CinemaTicket.Controllers
 
             if (!result.IsSuccess)
             {
-                return NotFound(ApiResponse<IEnumerable<IDto>>.Failure(result.Errors!));
+                return NotFound(result.Errors!);
             }
             else
             {
-                return Ok(ApiResponse<IEnumerable<IDto>>.Success(result.Value!));
+                return Ok((IEnumerable<TheaterDto>)result.Value!);
             }
         }
 

@@ -1,7 +1,8 @@
 ﻿using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Enums.EnumClasses;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CinemaTicket.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace CinemaTicket.Infrastructure.Context
 {
@@ -65,6 +66,10 @@ namespace CinemaTicket.Infrastructure.Context
                     }
                 }
             }
+
+            builder.SeedEnum();
         }
+
+
     }
 }

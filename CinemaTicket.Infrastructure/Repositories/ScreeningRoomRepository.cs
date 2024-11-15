@@ -1,4 +1,5 @@
 ﻿using CinemaTicket.Core.Entities;
+using CinemaTicket.Infrastructure.Context;
 using CinemaTicket.Infrastructure.Repositories.Generics;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ namespace CinemaTicket.Infrastructure.Repositories
 {
     public class ScreeningRoomRepository : GenericRepository<ScreeningRoom>
     {
-        public ScreeningRoomRepository(DbContext context) : base(context)
+        public ScreeningRoomRepository(CinemaTicketContext context) : base(context)
         {
         }
     }

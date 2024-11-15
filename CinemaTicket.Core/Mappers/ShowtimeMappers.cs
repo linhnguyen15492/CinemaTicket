@@ -19,6 +19,8 @@ namespace CinemaTicket.Core.Mappers
                 MovieId = showtime.MovieId,
                 MovieTitle = showtime.Movie.Title,
                 Price = showtime.Price,
+                TheaterId = showtime.ScreeningRoom?.TheaterId ?? 0,
+                TheaterName = showtime.ScreeningRoom?.Theater?.Name!,
             };
         }
 
