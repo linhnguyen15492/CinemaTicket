@@ -41,10 +41,11 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOpti
 builder.Services.AddScoped<IRepository<Theater>, TheaterRepository>();
 builder.Services.AddScoped<IRepository<Movie>, MovieRepository>();
 builder.Services.AddScoped<IRepository<Showtime>, ShowtimeRepository>();
-builder.Services.AddScoped<IRepository<TicketBooking>, TicketRepository>();
+builder.Services.AddScoped<IRepository<Ticket>, TicketRepository>();
 builder.Services.AddScoped<IRepository<ScreeningRoom>, ScreeningRoomRepository>();
 builder.Services.AddScoped<IRepository<ApplicationUser>, UserRepository>();
 builder.Services.AddScoped<IRepository<RefreshToken>, RefreshTokenRepository>();
+builder.Services.AddScoped<IRepository<Seat>, SeatRepository>();
 
 builder.Services.AddScoped<ISeedDataService, SeedDataService>();
 builder.Services.AddScoped<ITheaterService, TheaterService>();

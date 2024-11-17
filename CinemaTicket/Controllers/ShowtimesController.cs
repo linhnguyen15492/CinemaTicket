@@ -54,35 +54,39 @@ namespace CinemaTicket.Controllers
                     }
                 }
 
-                return BadRequest(ApiResponse<IDto>.Failure(errors.ToArray()));
+                return BadRequest(errors.ToArray());
             }
 
             var result = await _service.CreateAsync(createShowtimeDto);
 
             if (result.IsSuccess)
             {
-                return Ok(ApiResponse<IDto>.Success(result.Value!));
+                return Ok(result.Value!);
             }
             else
             {
-                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
+                return BadRequest(result.Errors!);
             }
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var res = await _service.GetByIdAsync(id);
+            var res = await _service.GetShowtimeByIdWithSeatsAsync(id);
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IDto>.Success(res.Value!));
+                return Ok(res.Value!);
             }
             else
             {
-                return NotFound(ApiResponse<IDto>.Failure("Not found"));
+                return NotFound(res.Errors);
             }
         }
+
+
 
         [HttpGet]
         [Route("search")]
@@ -102,7 +106,7 @@ namespace CinemaTicket.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
+                return Ok((IEnumerable<ShowtimeDto>)res.Value!);
             }
 
 

@@ -21,6 +21,8 @@ namespace CinemaTicket.Core.Mappers
                 Price = showtime.Price,
                 TheaterId = showtime.ScreeningRoom?.TheaterId ?? 0,
                 TheaterName = showtime.ScreeningRoom?.Theater?.Name!,
+                IsAvailable = showtime.IsAvailable,
+                Seats = showtime.Seats?.Select(d => d.ToSeatDto()).ToList(),
             };
         }
 

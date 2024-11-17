@@ -25,6 +25,7 @@ namespace CinemaTicket.Core.Entities
         public ShowtimeSchedule ShowtimeSchedule { get; set; } = default!;
 
         public int MovieId { get; set; }
+
         [ForeignKey("MovieId")]
         [Required]
         public Movie Movie { get; set; } = default!;
@@ -33,7 +34,7 @@ namespace CinemaTicket.Core.Entities
         {
             get
             {
-                if (TicketBookings.Count == ScreeningRoom?.Capacity)
+                if (TicketDetails?.Count == ScreeningRoom?.Capacity)
                 {
                     return false;
                 }
@@ -48,6 +49,8 @@ namespace CinemaTicket.Core.Entities
 
         public double Price { get; set; }
 
-        public ICollection<TicketBooking> TicketBookings { get; set; } = new List<TicketBooking>();
+        public ICollection<TicketDetail>? TicketDetails { get; set; }
+
+        public ICollection<Seat> Seats { get; set; } = default!;
     }
 }

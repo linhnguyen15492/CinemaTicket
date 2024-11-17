@@ -30,7 +30,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 await SeedMovies(_context.Movies);
                 await SeedScreeningRooms(_context.ScreeningRooms);
                 await SeedShowtimes(_context.Showtimes);
-                await SeedCinemaSeats(_context.CinemaSeats);
+                await SeedSeats(_context.Seats);
                 await SeedAppRoles();
                 await SeedUsers();
                 await SeedTicketBookings(_context.TicketBookings);
@@ -197,7 +197,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             }
         }
 
-        private async Task SeedCinemaSeats(DbSet<CinemaSeat> dbset)
+        private async Task SeedSeats(DbSet<Seat> dbset)
         {
             if (dbset.Any())
             {
@@ -205,26 +205,42 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             }
             else
             {
-                var rooms = _context.ScreeningRooms.ToList();
+                var shows = await _context.Showtimes.Include(s => s.ScreeningRoom).ToListAsync();
 
-
-                int start = -1;
-                foreach (var room in rooms)
+                foreach (var show in shows)
                 {
-                    var id = room.Id;
-
-                    var list = new List<CinemaSeat>();
-                    var numberOfSeats = room.Capacity;
-
-                    for (int i = 0; i < numberOfSeats; i++)
+                    if (show.ScreeningRoom is not null)
                     {
-                        list.Add(new CinemaSeat { Id = start, ScreeningRoomId = id });
-                        start--;
-                    }
+                        var list = new List<Seat>();
 
-                    await _context.AddRangeAsync(list);
-                    await _context.SaveChangesAsync();
+                        for (int i = 1; i <= show.ScreeningRoom.Capacity; i++)
+                        {
+                            list.Add(new Seat { SeatNumber = i, ShowtimeId = show.Id });
+                        }
+
+                        show.Seats = list;
+
+                        await _context.SaveChangesAsync();
+                    }
                 }
+
+                //int start = -1;
+                //foreach (var room in rooms)
+                //{
+                //    var id = room.Id;
+
+                //    var list = new List<Seat>();
+                //    var numberOfSeats = room.Capacity;
+
+                //    for (int i = 0; i < numberOfSeats; i++)
+                //    {
+                //        list.Add(new Seat { Id = start, ScreeningRoomId = id });
+                //        start--;
+                //    }
+
+                //    await _context.AddRangeAsync(list);
+                //    await _context.SaveChangesAsync();
+                //}
 
                 Messages.Enqueue("Seed data Seat thành công");
             }
@@ -324,49 +340,48 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             }
         }
 
-        private async Task SeedTicketBookings(DbSet<TicketBooking> dbset)
+        private async Task SeedTicketBookings(DbSet<Ticket> dbset)
         {
             if (dbset.Any())
             {
                 return;
             }
 
-            var bookings = new List<TicketBooking>
+            var bookings = new List<Ticket>
             {
-                new TicketBooking
+                new Ticket
                 {
                     Id = -1,
-                    ShowtimeId = -1,
                     Price = 10,
-                    StatusId = BookingStatusEnum.Pending,
-                    TicketBookingDetails = new List<TicketBookingDetail>
+                    TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketBookingDetail { CinemaSeatId = -1 },
-                        new TicketBookingDetail { CinemaSeatId = -2 },
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 1},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 2},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 3},
                     }
                 },
-                new TicketBooking
+
+                new Ticket
                 {
                     Id = -2,
-                    ShowtimeId = -1,
                     Price = 10,
-                    StatusId = BookingStatusEnum.Pending,
-                    TicketBookingDetails = new List<TicketBookingDetail>
+                    TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketBookingDetail { CinemaSeatId = -3 },
-                        new TicketBookingDetail { CinemaSeatId = -4 },
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 4},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 5},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 6},
                     }
                 },
-                new TicketBooking
+
+                new Ticket
                 {
                     Id = -3,
-                    ShowtimeId = -1,
                     Price = 10,
-                    StatusId = BookingStatusEnum.Pending,
-                    TicketBookingDetails = new List<TicketBookingDetail>
+                    TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketBookingDetail { CinemaSeatId = -5 },
-                        new TicketBookingDetail { CinemaSeatId = -6 },
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 7},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 8},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9},
                     }
                 },
             };

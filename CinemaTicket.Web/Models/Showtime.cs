@@ -28,5 +28,9 @@ namespace CinemaTicket.Web.Models
 
         [Display(Name = "Tên rạp")]
         public string TheaterName { get; set; } = string.Empty;
+
+        public bool IsAvailable { get; set; }
+
+        public ICollection<Seat>? Seats { get; set; }
     }
 }

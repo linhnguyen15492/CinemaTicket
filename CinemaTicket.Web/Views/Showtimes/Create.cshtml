@@ -1,0 +1,71 @@
+﻿@using CinemaTicket.Web.ViewModels
+
+@model CreateShowtimeViewModel
+
+<h1>Tạo suất chiếu</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Showtimes" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group p-2">
+                <label class="control-label">Rạp</label>
+                <input disabled class="form-control" type="text" value="@Model.TheaterName" />
+
+            </div>
+
+            <div class="form-group p-2">
+                <label asp-for="CreateShowtimeDto.Date" class="control-label">Ngày</label>
+                <input asp-for="CreateShowtimeDto.Date" class="form-control" type="date" />
+                <span asp-validation-for="CreateShowtimeDto.Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <label asp-for="CreateShowtimeDto.SccreeningRoomId" class="control-label">Phòng chiếu</label>
+
+                <select asp-items="Model.ScreeningRooms" asp-for="CreateShowtimeDto.SccreeningRoomId" class="form-control"></select>
+
+                <span asp-validation-for="CreateShowtimeDto.SccreeningRoomId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <label asp-for="CreateShowtimeDto.ShowtimeScheduleId" class="control-label">Khung giờ</label>
+
+                @Html.DropDownListFor(m => m.CreateShowtimeDto.ShowtimeScheduleId, Model.ShowtimeSchedules, new { @class = "form-control" })
+
+                <span asp-validation-for="CreateShowtimeDto.ShowtimeScheduleId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <label asp-for="CreateShowtimeDto.Price" class="control-label">Giá vé</label>
+                <input asp-for="CreateShowtimeDto.Price" class="form-control" type="number" />
+                <span asp-validation-for="CreateShowtimeDto.Price" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <label asp-for="CreateShowtimeDto.MovieId" class="control-label">Phim</label>
+                <select asp-for="CreateShowtimeDto.MovieId" asp-items="@Model.Movies" class="form-control">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="CreateShowtimeDto.ShowtimeScheduleId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="p-2">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

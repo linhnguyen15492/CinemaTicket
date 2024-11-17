@@ -6,16 +6,19 @@ using CinemaTicket.Core.Dtos;
 using CinemaTicket.Core.Mappers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using CinemaTicket.Infrastructure.Repositories;
 
 namespace CinemaTicket.Infrastructure.Services
 {
     public class ShowtimeService : IShowtimeService
     {
-        private readonly IRepository<Showtime> _repository;
+        private readonly IRepository<Showtime> _showtimeRepository;
+        private readonly IRepository<Seat> _seatRepository;
 
-        public ShowtimeService(IRepository<Showtime> repository)
+        public ShowtimeService(IRepository<Showtime> showtimeRepository, IRepository<Seat> seatRepository)
         {
-            _repository = repository;
+            _showtimeRepository = showtimeRepository;
+            _seatRepository = seatRepository;
         }
 
         public async Task<Result<IDto>> CreateAsync(IDto t)
@@ -24,16 +27,22 @@ namespace CinemaTicket.Infrastructure.Services
             {
                 var showtime = t as CreateShowtimeDto;
 
-                var result = await _repository.AddAsync(showtime!.ToShowtime());
+                var result = await _showtimeRepository.AddAsync(showtime!.ToShowtime());
 
-                if (result is null)
+                if (result is not null)
                 {
-                    return Result<IDto>.Failure("Fail to create showtime");
+                    var seats = await GenerateSeats(result.Id);
+
+                    if (seats is not null)
+                    {
+                        await _seatRepository.AddRangeAsync(seats);
+
+                        return Result<IDto>.Success(t);
+                    }
+
                 }
-                else
-                {
-                    return Result<IDto>.Success(t);
-                }
+
+                return Result<IDto>.Failure("Fail to create showtime");
             }
             catch (Exception ex)
             {
@@ -48,7 +57,7 @@ namespace CinemaTicket.Infrastructure.Services
 
         public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
-            var result = await _repository.GetAllAsync();
+            var result = await _showtimeRepository.GetAllAsync();
 
             if (result is null)
             {
@@ -62,7 +71,7 @@ namespace CinemaTicket.Infrastructure.Services
 
         public async Task<Result<IDto?>> GetByIdAsync(int id)
         {
-            var res = await _repository.GetByIdAsync(id);
+            var res = await _showtimeRepository.GetByIdAsync(id);
 
             if (res is null)
             {
@@ -75,12 +84,7 @@ namespace CinemaTicket.Infrastructure.Services
 
         private async Task<Showtime?> GetShowtimeByIdAsync(int id)
         {
-            var res = await _repository.Query().Where(s => s.Id == id)
-                .Include(s => s.Movie)
-                .Include(s => s.ScreeningRoom)
-                    .ThenInclude(r => r.ScreeningRoomType)
-                .Include(s => s.ShowtimeSchedule)
-                .FirstOrDefaultAsync();
+            var res = await _showtimeRepository.Query().Where(s => s.Id == id).FirstOrDefaultAsync();
 
             return res;
         }
@@ -89,7 +93,7 @@ namespace CinemaTicket.Infrastructure.Services
         {
             var req = queryObject as ShowtimeQuery;
 
-            IQueryable<Showtime> query = _repository.GetAll()
+            IQueryable<Showtime> query = _showtimeRepository.GetAll()
                                                     .Include(s => s.Movie)
                                                     .Include(s => s.ScreeningRoom)
                                                         .ThenInclude(r => r.ScreeningRoomType)
@@ -118,6 +122,45 @@ namespace CinemaTicket.Infrastructure.Services
         public Task<Result<IDto>> DeleteAsync(int id)
         {
             throw new NotImplementedException();
+        }
+
+
+        private async Task<List<Seat>?> GenerateSeats(int showtimeId)
+        {
+            var showtime = await GetShowtimeByIdAsync(showtimeId);
+
+            var seats = new List<Seat>();
+            if (showtime is not null)
+            {
+                for (int i = 1; i <= showtime.ScreeningRoom?.Capacity; i++)
+                {
+                    seats.Add(new Seat { SeatNumber = i, ShowtimeId = showtimeId });
+                }
+            }
+
+            return seats;
+        }
+
+        public async Task<Result<ShowtimeDto>> GetShowtimeByIdWithSeatsAsync(int id)
+        {
+
+            var showtime = await _showtimeRepository.Query()
+                                               .Where(s => s.Id == id)
+                                                    .Include(s => s.Movie)
+                                                    .Include(s => s.ScreeningRoom)
+                                                        .ThenInclude(r => r.ScreeningRoomType)
+                                                    .Include(s => s.ShowtimeSchedule)
+                                                    .Include(s => s.Seats)
+                                               .FirstOrDefaultAsync();
+
+
+
+            if (showtime is not null)
+            {
+                return Result<ShowtimeDto>.Success(showtime.ToShowtimeDto());
+            }
+
+            return Result<ShowtimeDto>.Failure("Showtime not found!");
         }
     }
 

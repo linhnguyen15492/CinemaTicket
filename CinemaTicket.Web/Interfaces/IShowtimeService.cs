@@ -1,4 +1,6 @@
-﻿namespace CinemaTicket.Web.Interfaces
+﻿using CinemaTicket.Web.Models;
+
+namespace CinemaTicket.Web.Interfaces
 {
     public interface IShowtimeService
     {

@@ -1,26 +1,42 @@
 ﻿@model IEnumerable<Showtime>
 
 @{
-    ViewData["Title"] = "Suất chiếu";
+    ViewData["Title"] = "Lịch chiếu phim";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var data = ViewBag.ScheduleTypes;
+
+    var selectList = new SelectList(data, "Value", "Text", 0);
 }
 
-<h1>Suất chiếu</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a class="btn btn-success" asp-action="Create">Tạo mới</a>
+    <a class="btn btn-success" asp-action="ChooseTheater">Tạo mới</a>
 </p>
 
-<form asp-controller="Movies" asp-action="Index" method="get">
+
+@* <select asp-items="selectList"> *@
+@*     <option value=""></option> *@
+@* </select> *@
+
+<form asp-controller="Showtimes" asp-action="Index" method="get">
     <p>
-        <label>Title: <input class="form-control" type="text" name="SearchString" /></label>
+        <label>Tên phim: <input class="form-control" type="text" name="searchName" /></label>
         @* <input type="submit" value="Filter" /> *@
 
-        <label for="searchDate">
-            Date:
-            <input class="form-control" type="date" id="searchDate" name="searchDate">
+        <label class="m-1" for="searchSchedule">
+            Ca chiếu:
+            @* <input class="form-control" type="text" id="searchSchedule" name="searchSchedule"> *@
+
+
+            @Html.DropDownList("scheduleType", new SelectList(ViewBag.ScheduleTypes, "Value", "Text"), new { @class = "form-control" })
         </label>
 
+        <label class="m-1" for="searchDate">
+            Ngày:
+            <input class="form-control" type="date" id="searchDate" name="searchDate">
+        </label>
 
         <button class="btn btn-primary" type="submit">Search</button>
 
@@ -75,7 +91,7 @@
                     @Html.DisplayFor(modelItem => item.TheaterName)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Tickets" asp-action="Index" asp-route-showtimeId="@item.Id">Bán vé</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>

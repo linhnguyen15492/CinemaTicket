@@ -10,9 +10,9 @@ namespace CinemaTicket.Infrastructure.Services
 {
     public class TicketService : ITicketService
     {
-        private readonly IRepository<TicketBooking> _repository;
+        private readonly IRepository<Ticket> _repository;
 
-        public TicketService(IRepository<TicketBooking> repository)
+        public TicketService(IRepository<Ticket> repository)
         {
             _repository = repository;
         }
@@ -34,14 +34,17 @@ namespace CinemaTicket.Infrastructure.Services
 
         public async Task<Result<IEnumerable<IDto>>> GetAllAsync()
         {
-            var res = await _repository.GetAll().Include(t => t.Showtime)
-                                    .ThenInclude(s => s.Movie)
-                               .Include(t => t.Showtime)
-                                    .ThenInclude(s => s.ScreeningRoom)
-                                        .ThenInclude(s => s.Theater)
-                                .Include(t => t.Status)
-                                .Include(t => t.TicketBookingDetails)
-                                .ToListAsync();
+            //var res = await _repository.GetAll().Include(t => t.Showtime)
+            //                        .ThenInclude(s => s.Movie)
+            //                   .Include(t => t.Showtime)
+            //                        .ThenInclude(s => s.ScreeningRoom)
+            //                            .ThenInclude(s => s.Theater)
+            //                    .Include(t => t.Status)
+            //                    .ToListAsync();
+
+            var res = await _repository.GetAll().Include(t => t.TicketDetails)
+                    .ToListAsync();
+
 
             if (res is null)
             {
@@ -49,7 +52,7 @@ namespace CinemaTicket.Infrastructure.Services
             }
             else
             {
-                return Result<IEnumerable<IDto>>.Success(res.Select(t => t.ToTicketBookingDto()));
+                return Result<IEnumerable<IDto>>.Success(res.Select(t => t.ToTicketDto()));
             }
         }
 

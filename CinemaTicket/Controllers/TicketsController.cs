@@ -13,7 +13,7 @@ namespace CinemaTicket.Controllers
 
         public TicketsController(ITicketService ticketService)
         {
-            _ticketService=ticketService;
+            _ticketService = ticketService;
         }
 
         [HttpGet]
@@ -25,11 +25,11 @@ namespace CinemaTicket.Controllers
             if (res.IsSuccess)
             {
 
-                return Ok(ApiResponse<IEnumerable<IDto>>.Success(res.Value!));
+                return Ok(res.Value!);
             }
             else
             {
-                return BadRequest(ApiResponse<IEnumerable<IDto>>.Failure(res.Errors));
+                return BadRequest(res.Errors);
             }
         }
 

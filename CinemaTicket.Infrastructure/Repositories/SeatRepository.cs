@@ -2,7 +2,6 @@
 using CinemaTicket.Core.Interfaces.Repositories;
 using CinemaTicket.Infrastructure.Context;
 using CinemaTicket.Infrastructure.Repositories.Generics;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace CinemaTicket.Infrastructure.Repositories
 {
-    public class TicketRepository : GenericRepository<Ticket>, ITicketRepository
+    public class SeatRepository : GenericRepository<Seat>, ISeatRepository
     {
-        public TicketRepository(CinemaTicketContext context) : base(context)
+        public SeatRepository(CinemaTicketContext context) : base(context)
         {
         }
     }

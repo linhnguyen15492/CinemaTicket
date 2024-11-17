@@ -18,14 +18,14 @@ namespace CinemaTicket.Infrastructure.Context
         public required DbSet<Showtime> Showtimes { get; set; }
         public required DbSet<Movie> Movies { get; set; }
         public required DbSet<ScreeningRoom> ScreeningRooms { get; set; }
-        public required DbSet<TicketBooking> TicketBookings { get; set; }
-        public required DbSet<TicketBookingDetail> TicketBookingDetails { get; set; }
+        public required DbSet<Ticket> TicketBookings { get; set; }
         public required DbSet<BookingStatus> BookingStatus { get; set; }
         public required DbSet<MovieStatus> MovieStatuses { get; set; }
         public required DbSet<ScreeningRoomType> ScreeningRoomTypes { get; set; }
         public required DbSet<ShowtimeSchedule> ShowtimeSchedules { get; set; }
         public required DbSet<Department> Departments { get; set; }
-        public required DbSet<CinemaSeat> CinemaSeats { get; set; }
+        public required DbSet<Seat> Seats { get; set; }
+        public required DbSet<TicketDetail> TicketDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,17 +42,9 @@ namespace CinemaTicket.Infrastructure.Context
                 entity.HasAlternateKey(c => new { c.Date, c.ShowtimeScheduleId, c.SccreeningRoomId }); ;
             });
 
-            builder.Entity<TicketBooking>(entity =>
-            {
-                entity.HasAlternateKey(c => new { c.Id, c.ShowtimeId });
-            });
+            builder.Entity<TicketDetail>(entity => entity.HasOne(c => c.Seat).WithMany().HasForeignKey(c => new { c.SeatNumber, c.ShowtimeId }));
 
-            builder.Entity<TicketBookingDetail>(entity =>
-            {
-                entity.HasAlternateKey(c => new { c.TicketBookingId, c.CinemaSeatId });
-            });
-
-            builder.Entity<CinemaSeat>().HasAlternateKey(c => new { c.Id, c.ScreeningRoomId });
+            builder.Entity<Seat>().HasKey(c => new { c.SeatNumber, c.ShowtimeId });
 
             // Bỏ tiền tố AspNet của các bảng: mặc định
             foreach (var entityType in builder.Model.GetEntityTypes())
