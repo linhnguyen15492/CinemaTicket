@@ -276,8 +276,6 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 Messages.Enqueue("Seed data User thất bại");
             }
 
-
-
             var manager = new ApplicationUser
             {
                 UserName = "manager",

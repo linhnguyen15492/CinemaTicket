@@ -200,7 +200,6 @@ namespace CinemaTicket.Infrastructure.Services
                     RefreshToken = token.Item2,
                 });
             }
-
         }
 
         public async Task<Result<TokenModel>> LoginAsync(string username, string password)

@@ -51,8 +51,10 @@
                         }
                         else
                         {
-                            <li class="nav-item fw-bold text-success align-content-center">
-                                Xin chào, @UserService.GetCurrentUser()!
+                            <li class="nav-item">
+                                <a asp-action="Profile" asp-controller="Account" class="fw-bold text-success align-content-center text-decoration-none">
+                                    Xin chào, @UserService.GetCurrentUser()!
+                                </a>
                             </li>
                         }
                     </ul>

@@ -3,6 +3,7 @@ using CinemaTicket.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace CinemaTicket.Web.Controllers
 {
@@ -17,7 +18,7 @@ namespace CinemaTicket.Web.Controllers
         public AccountController(IHttpClientFactory httpClientFactory, UserService userService)
         {
             _httpClientFactory = httpClientFactory;
-            _userService=userService;
+            _userService = userService;
         }
 
         public IActionResult Index()
@@ -49,13 +50,16 @@ namespace CinemaTicket.Web.Controllers
                 return BadRequest("Đăng nhập thất bại");
             }
 
-            var accessToken = await response.Content.ReadAsStringAsync();
+            var jwtToken = await response.Content.ReadFromJsonAsync<TokenModel>();
+
+            var accessToken = jwtToken!.AccessToken;
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.ReadJwtToken(accessToken);
+            var jwt = tokenHandler.ReadJwtToken(accessToken);
 
             // Lấy danh sách roles từ claim "roles"
-            string[] roles = token.Claims.FirstOrDefault(c => c.Type == "roles")?.Value.Split(',')!;
+            var roles = jwt.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray();
+
 
             // Lưu thông tin vào vào session
             HttpContext.Session.SetString("accessToken", accessToken);
@@ -78,7 +82,9 @@ namespace CinemaTicket.Web.Controllers
 
             var username = HttpContext.Session.GetString("username");
 
+
             ViewData["username"] = username;
+            ViewData["roles"] = _userService.GetRoles();
 
             if (string.IsNullOrEmpty(token))
             {

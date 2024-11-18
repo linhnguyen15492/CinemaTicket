@@ -11,14 +11,34 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-<div>
-    @if (UserService.GetCurrentToken() != null)
-    {
-        <p>Welcome, @UserService.GetCurrentUser() </p>
-        <a href="/logout">Logout</a>
-    }
-    else
-    {
-        <a href="/login">Login</a>
-    }
-</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>admin</td>
+            <td>Abc@123</td>
+            <td>Administrator</td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>manager</td>
+            <td>Abc@123</td>
+            <td>OfficeManager</td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>seller</td>
+            <td>Abc@123</td>
+            <td>TicketSeller</td>
+        </tr>
+    </tbody>
+</table>

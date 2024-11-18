@@ -43,9 +43,9 @@
             _httpContextAccessor.HttpContext.Session.SetString("Roles", roles);
         }
 
-        public void GetRoles()
+        public string GetRoles()
         {
-            _httpContextAccessor.HttpContext.Session.GetString("Roles");
+            return _httpContextAccessor.HttpContext.Session.GetString("Roles");
         }
     }
 }
