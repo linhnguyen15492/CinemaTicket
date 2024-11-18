@@ -1,6 +1,7 @@
 ﻿using CinemaTicket.Core.Dtos;
 using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaTicket.Controllers
@@ -36,6 +37,8 @@ namespace CinemaTicket.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [Authorize(Roles = UserRoles.Administrator + "," + UserRoles.TicketSeller)]
         public async Task<IActionResult> CreateAsync([FromBody] CreateTicketDto ticket)
         {
             var res = await _ticketService.CreateAsync(ticket);

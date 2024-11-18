@@ -102,5 +102,14 @@ namespace CinemaTicket.Web.Controllers
 
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("accessToken");
+            HttpContext.Session.Remove("username");
+            HttpContext.Session.Clear();
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

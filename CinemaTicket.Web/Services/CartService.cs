@@ -37,7 +37,6 @@ namespace CinemaTicket.Web.Services
         public void ClearCart()
         {
             _httpContext.Session.Remove(CARTKEY);
-            _httpContext.Session.Clear();
         }
 
         // Lưu Cart (Danh sách CartItem) vào session

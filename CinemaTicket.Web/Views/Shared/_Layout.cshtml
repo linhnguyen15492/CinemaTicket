@@ -52,8 +52,11 @@
                         else
                         {
                             <li class="nav-item">
-                                <a asp-action="Profile" asp-controller="Account" class="fw-bold text-success align-content-center text-decoration-none">
+                                <a asp-action="Profile" asp-controller="Account" class="fw-bold text-success align-content-center text-decoration-none m-2">
                                     Xin chào, @UserService.GetCurrentUser()!
+                                </a>
+                                <a asp-action="Logout" asp-controller="Account" class="fw-bold text-danger align-content-center text-decoration-none m-2">
+                                    Logout
                                 </a>
                             </li>
                         }

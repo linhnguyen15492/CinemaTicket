@@ -12,18 +12,36 @@ namespace CinemaTicket.Web.Controllers
         private readonly ShowtimeService _showtimeService;
         private readonly TicketService _ticketService;
         private readonly CartService _cartService;
+        private readonly UserService _userService;
 
         public TicketViewModel TicketViewModel { get; set; } = new TicketViewModel();
 
-        public TicketsController(ShowtimeService showtimeService, CartService cartService, TicketService ticketService)
+        public TicketsController(ShowtimeService showtimeService, CartService cartService, TicketService ticketService, UserService userService)
         {
             _showtimeService = showtimeService;
             _cartService = cartService;
             _ticketService = ticketService;
+            _userService = userService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index(int showtimeId)
         {
+            var user = _userService.GetCurrentUser();
+
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            var roles = _userService.GetRoles();
+
+            if (!roles.Contains("Administrator") && !roles.Contains("TicketSeller"))
+            {
+                return Unauthorized("Bạn không có quyền thực hiện!");
+            }
+
+
             var ticket = _cartService.GetCart();
 
             if (ticket == null)
