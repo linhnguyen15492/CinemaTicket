@@ -9,7 +9,7 @@ namespace CinemaTicket.Core.Entities
 {
     public class TicketDetail : BaseEntity
     {
-        public int TicketId { get; set; }
+        public int? TicketId { get; set; }
 
         [ForeignKey("TicketId")]
         public Ticket Ticket { get; set; } = default!;
@@ -21,6 +21,8 @@ namespace CinemaTicket.Core.Entities
         public int SeatNumber { get; set; }
 
         public Seat Seat { get; set; } = default!;
+
+        public double Price { get; set; }
     }
 }
 

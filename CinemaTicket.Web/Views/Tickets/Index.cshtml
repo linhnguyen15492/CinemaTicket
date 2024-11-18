@@ -10,16 +10,19 @@
 </h1>
 
 
-<h2>
-    Showtime ID : @Model.ShowtimeId
+<div>
+    Showtime ID : @Model.Showtime.Id
 
     Ngày: @Model.Showtime.Date
     Phim: @Model.Showtime.MovieTitle
     Phòng: @Model.Showtime.ScreeningRoomType
 
     Số vé: @ViewData["Tickets"]
-</h2>
+</div>
 
+<form asp-action="checkout" method="post">
+    <input type="submit" value="Đặt vé" class="btn btn-primary" />
+</form>
 
 <div class="container text-center">
     <div class="row row-cols-sm-auto">
@@ -28,10 +31,18 @@
         {
             <div class="col">
 
-                <form asp-action="Index" method="get">
-                    <input type="hidden" name="showtimeId" value="@Model.ShowtimeId" />
+                <form asp-action="AddToCart" method="post">
+                    <input type="hidden" name="showtimeId" value="@Model.Showtime.Id" />
                     <input type="hidden" name="seatNumber" value="@seat.SeatNumber" />
-                    <input type="submit" value="@seat.SeatNumber" class="card border-info mb-3 text-success fw-bold" style="width: 4rem; height: 4rem" />
+
+                    @if (seat.IsReserved)
+                    {
+                        <input type="submit" value="@seat.SeatNumber" class="card border-info mb-3 text-danger fw-bold" style="width: 4rem; height: 4rem" disabled />
+                    }
+                    else
+                    {
+                        <input type="submit" value="@seat.SeatNumber" class="card border-info mb-3 text-success fw-bold" style="width: 4rem; height: 4rem" />
+                    }
                 </form>
 
 

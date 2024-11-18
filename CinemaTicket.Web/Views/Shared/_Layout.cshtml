@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using CinemaTicket.Web.Services
+@inject UserService UserService
+
+
+@{
+    ViewData["XinChao"] = "Bạn đã đăng nhập";
+}
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,6 +41,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Showtimes" asp-action="Index">Lịch chiếu</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @if (UserService.GetCurrentToken() == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark btn btn-outline-info fw-bold" asp-area="" asp-controller="Account" asp-action="Index">Login</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item fw-bold text-success align-content-center">
+                                Xin chào, @UserService.GetCurrentUser()!
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

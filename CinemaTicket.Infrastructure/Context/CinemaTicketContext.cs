@@ -18,7 +18,7 @@ namespace CinemaTicket.Infrastructure.Context
         public required DbSet<Showtime> Showtimes { get; set; }
         public required DbSet<Movie> Movies { get; set; }
         public required DbSet<ScreeningRoom> ScreeningRooms { get; set; }
-        public required DbSet<Ticket> TicketBookings { get; set; }
+        public required DbSet<Ticket> Tickets { get; set; }
         public required DbSet<BookingStatus> BookingStatus { get; set; }
         public required DbSet<MovieStatus> MovieStatuses { get; set; }
         public required DbSet<ScreeningRoomType> ScreeningRoomTypes { get; set; }

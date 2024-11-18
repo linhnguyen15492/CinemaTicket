@@ -94,11 +94,11 @@ namespace CinemaTicket.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
+                return BadRequest(result.Errors!);
             }
             else
             {
-                return Ok(ApiResponse<IDto>.Success(result.Value!));
+                return Ok(result.Value!);
             }
         }
 
@@ -114,11 +114,11 @@ namespace CinemaTicket.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
+                return BadRequest(result.Errors!);
             }
             else
             {
-                return Ok(ApiResponse<IDto>.Success(result.Value!));
+                return Ok(result.Value!);
             }
         }
 
@@ -135,11 +135,11 @@ namespace CinemaTicket.Controllers
 
             if (!result.IsSuccess)
             {
-                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
+                return BadRequest(result.Errors!);
             }
             else
             {
-                return Ok(ApiResponse<IDto>.Success(result.Value!));
+                return Ok(result.Value!);
             }
         }
     }

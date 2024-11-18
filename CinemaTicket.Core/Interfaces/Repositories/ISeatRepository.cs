@@ -9,5 +9,6 @@ namespace CinemaTicket.Core.Interfaces.Repositories
 {
     public interface ISeatRepository : IRepository<Seat>
     {
+        Task<bool> UpdateSeatStatusAsync(int seatNumber, int showtimeId);
     }
 }

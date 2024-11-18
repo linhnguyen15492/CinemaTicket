@@ -42,19 +42,18 @@ namespace CinemaTicket.Controllers
         [HttpPost]
         [Route("login")]
         [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
         public async Task<IActionResult> LoginAsync(LoginModel model)
         {
             var result = await _service.LoginAsync(model);
 
             if (result.IsSuccess)
             {
-                string messages = "Login Successful";
-                return Ok(ApiResponse<TokenModel>.Success(result.Value!, messages));
+                return Ok(result.Value!);
             }
             else
             {
-                return BadRequest(ApiResponse<TokenModel>.Failure(result.Errors!));
+                return NotFound(result.Errors!);
             }
         }
 

@@ -11,8 +11,28 @@ namespace CinemaTicket.Core.Mappers
             {
                 Id = ticket.Id,
                 ShowtimeId = ticket.ShowtimeId,
-                Price = ticket.Price,
             };
         }
+
+        public static ResponseTicketDto ToResponseTicketDto(this Ticket ticket)
+        {
+            return new ResponseTicketDto
+            {
+                TicketId = ticket.Id,
+                ShowtimeId = ticket.ShowtimeId,
+            };
+        }
+
+        public static TicketDetail ToTicketDetail(this TicketDetailDto ticketDetailDto)
+        {
+            return new TicketDetail
+            {
+                ShowtimeId = ticketDetailDto.ShowtimeId,
+                SeatNumber = ticketDetailDto.SeatNumber,
+                Price = ticketDetailDto.Price,
+            };
+        }
+
+
     }
 }

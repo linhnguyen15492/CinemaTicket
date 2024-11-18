@@ -3,6 +3,7 @@ using CinemaTicket.Web.Dtos;
 using CinemaTicket.Web.Models;
 using CinemaTicket.Web.Services;
 using CinemaTicket.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;

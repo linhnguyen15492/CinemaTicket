@@ -33,7 +33,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 await SeedSeats(_context.Seats);
                 await SeedAppRoles();
                 await SeedUsers();
-                await SeedTicketBookings(_context.TicketBookings);
+                await SeedTickets(_context.Tickets);
             }
             catch
             (Exception ex)
@@ -224,24 +224,6 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                     }
                 }
 
-                //int start = -1;
-                //foreach (var room in rooms)
-                //{
-                //    var id = room.Id;
-
-                //    var list = new List<Seat>();
-                //    var numberOfSeats = room.Capacity;
-
-                //    for (int i = 0; i < numberOfSeats; i++)
-                //    {
-                //        list.Add(new Seat { Id = start, ScreeningRoomId = id });
-                //        start--;
-                //    }
-
-                //    await _context.AddRangeAsync(list);
-                //    await _context.SaveChangesAsync();
-                //}
-
                 Messages.Enqueue("Seed data Seat thành công");
             }
         }
@@ -340,7 +322,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             }
         }
 
-        private async Task SeedTicketBookings(DbSet<Ticket> dbset)
+        private async Task SeedTickets(DbSet<Ticket> dbset)
         {
             if (dbset.Any())
             {
@@ -352,36 +334,34 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 new Ticket
                 {
                     Id = -1,
-                    Price = 10,
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 1},
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 2},
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 3},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 1, Price = 10},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 2, Price = 10,},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 3, Price = 10},
                     }
                 },
 
                 new Ticket
                 {
                     Id = -2,
-                    Price = 10,
+
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 4},
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 5},
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 6},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 4, Price = 10,},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 5, Price = 10,},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 6 , Price = 10},
                     }
                 },
 
                 new Ticket
                 {
                     Id = -3,
-                    Price = 10,
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 7},
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 8},
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 7, Price = 10,},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 8, Price = 10,},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9, Price = 10,},
                     }
                 },
             };

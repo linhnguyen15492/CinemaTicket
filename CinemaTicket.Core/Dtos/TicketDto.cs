@@ -1,9 +1,10 @@
-﻿namespace CinemaTicket.Core.Dtos
+﻿using CinemaTicket.Core.Entities;
+
+namespace CinemaTicket.Core.Dtos
 {
     public class TicketDto : BaseDto
     {
         public int ShowtimeId { get; set; }
-        public double Price { get; set; }
         public int ScreeningRoomId { get; set; }
         public string ScreeningRoomName { get; set; } = string.Empty;
         public int MovieId { get; set; }
@@ -15,7 +16,14 @@
     public class CreateTicketDto : IDto
     {
         public int ShowtimeId { get; set; }
-        public int BookingStatusId { get; set; }
-        public double Price { get; set; }
+
+        public ICollection<TicketDetailDto> TicketDetails { get; set; } = default!;
+    }
+
+    public class ResponseTicketDto : IDto
+    {
+        public int ShowtimeId { get; set; }
+
+        public int TicketId { get; set; }
     }
 }

@@ -45,7 +45,7 @@ builder.Services.AddScoped<IRepository<Ticket>, TicketRepository>();
 builder.Services.AddScoped<IRepository<ScreeningRoom>, ScreeningRoomRepository>();
 builder.Services.AddScoped<IRepository<ApplicationUser>, UserRepository>();
 builder.Services.AddScoped<IRepository<RefreshToken>, RefreshTokenRepository>();
-builder.Services.AddScoped<IRepository<Seat>, SeatRepository>();
+builder.Services.AddScoped<ISeatRepository, SeatRepository>();
 
 builder.Services.AddScoped<ISeedDataService, SeedDataService>();
 builder.Services.AddScoped<ITheaterService, TheaterService>();

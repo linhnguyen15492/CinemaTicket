@@ -1,6 +1,6 @@
 ﻿using CinemaTicket.Core.Dtos;
+using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Interfaces.Services;
-using CinemaTicket.Core.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaTicket.Controllers
@@ -34,11 +34,20 @@ namespace CinemaTicket.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAsync([FromBody] CreateTicketDto createTicketDto)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> CreateAsync([FromBody] CreateTicketDto ticket)
         {
+            var res = await _ticketService.CreateAsync(ticket);
 
-
-            return Ok(createTicketDto);
+            if (res.IsSuccess)
+            {
+                return Ok(res.Value!);
+            }
+            else
+            {
+                return BadRequest(res.Errors);
+            }
         }
     }
 }

@@ -43,11 +43,11 @@ namespace CinemaTicket.Controllers
 
             if (res.IsSuccess)
             {
-                return Ok(ApiResponse<IDto>.Success(res.Value!, "Get movie by id success"));
+                return Ok(res.Value!);
             }
             else
             {
-                return NotFound(ApiResponse<IDto>.Failure(res.Errors!));
+                return NotFound(res.Errors!);
             }
         }
 
@@ -61,11 +61,11 @@ namespace CinemaTicket.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok(ApiResponse<IDto>.Success(result.Value!, "Create movies success"));
+                return Ok(result.Value!);
             }
             else
             {
-                return BadRequest(ApiResponse<IDto>.Failure(result.Errors!));
+                return BadRequest(result.Errors!);
             }
         }
     }

@@ -12,10 +12,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<MovieService>(provider => new MovieService(baseUrl));
 builder.Services.AddScoped<ShowtimeService>(provider => new ShowtimeService(baseUrl));
 builder.Services.AddScoped<TheaterService>(provider => new TheaterService(baseUrl));
+builder.Services.AddScoped<TicketService>(provider => new TicketService(baseUrl));
 
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<CartService>();
+builder.Services.AddTransient<UserService>();
 
 
 builder.Services.AddHttpClient();

@@ -13,9 +13,9 @@ namespace CinemaTicket.Infrastructure.Services
     public class ShowtimeService : IShowtimeService
     {
         private readonly IRepository<Showtime> _showtimeRepository;
-        private readonly IRepository<Seat> _seatRepository;
+        private readonly ISeatRepository _seatRepository;
 
-        public ShowtimeService(IRepository<Showtime> showtimeRepository, IRepository<Seat> seatRepository)
+        public ShowtimeService(IRepository<Showtime> showtimeRepository, ISeatRepository seatRepository)
         {
             _showtimeRepository = showtimeRepository;
             _seatRepository = seatRepository;
