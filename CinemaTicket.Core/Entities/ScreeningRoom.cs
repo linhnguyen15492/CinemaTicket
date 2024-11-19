@@ -26,6 +26,7 @@ namespace CinemaTicket.Core.Entities
 
         [Required]
         public int TheaterId { get; set; }
+
         [ForeignKey("TheaterId")]
         public Theater Theater { get; set; } = default!;
     }
