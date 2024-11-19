@@ -11,10 +11,12 @@ namespace CinemaTicket.Controllers
     public class TicketsController : ControllerBase
     {
         private readonly ITicketService _ticketService;
+        private readonly ISalesService _salesService;
 
-        public TicketsController(ITicketService ticketService)
+        public TicketsController(ITicketService ticketService, ISalesService salesService)
         {
             _ticketService = ticketService;
+            _salesService = salesService;
         }
 
         [HttpGet]
@@ -50,6 +52,39 @@ namespace CinemaTicket.Controllers
             else
             {
                 return BadRequest(res.Errors);
+            }
+        }
+
+        [HttpGet("sales-by-show")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSalesByShow()
+        {
+            var res = await _salesService.GetSalesByShow();
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet("sales-by-movie")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetSalesByMovie()
+        {
+            var res = await _salesService.GetSalesByMovie();
+
+            if (res != null)
+            {
+                return Ok(res);
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

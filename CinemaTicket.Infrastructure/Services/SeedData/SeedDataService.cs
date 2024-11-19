@@ -34,6 +34,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 await SeedAppRoles();
                 await SeedUsers();
                 await SeedTickets(_context.Tickets);
+
             }
             catch
             (Exception ex)
@@ -193,18 +194,18 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             {
                 var data = new List<Showtime>
                 {
-                    new Showtime { Id = -1, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 18) },
-                    new Showtime { Id = -2, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 18) },
-                    new Showtime { Id = -3, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Evening, Date = new DateOnly(2024, 11, 18) },
-                    new Showtime { Id = -4, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Night, Date = new DateOnly(2024, 11, 18) },
-                    new Showtime { Id = -5, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -6, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -7, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -8, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -9, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -10, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -11, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
-                    new Showtime { Id = -12, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -1, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 18), Price = 120000 },
+                    new Showtime { Id = -2, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 18), Price = 120000  },
+                    new Showtime { Id = -3, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Evening, Date = new DateOnly(2024, 11, 18), Price = 120000  },
+                    new Showtime { Id = -4, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Night, Date = new DateOnly(2024, 11, 18), Price = 120000  },
+                    new Showtime { Id = -5, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19), Price= 100000 },
+                    new Showtime { Id = -6, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19), Price = 100000},
+                    new Showtime { Id = -7, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19), Price = 100000 },
+                    new Showtime { Id = -8, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19), Price = 90000 },
+                    new Showtime { Id = -9, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19), Price = 80000 },
+                    new Showtime { Id = -10, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19), Price = 80000 },
+                    new Showtime { Id = -11, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19), Price = 110000 },
+                    new Showtime { Id = -12, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19), Price = 110000 },
                 };
 
 
@@ -351,34 +352,36 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                 new Ticket
                 {
                     Id = -1,
+                    ShowtimeId = -1,
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 1, Price = 10},
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 2, Price = 10,},
-                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 3, Price = 10},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 1, Price = 120000},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 2, Price = 120000,},
+                        new TicketDetail {TicketId = -1, ShowtimeId = -1, SeatNumber = 3, Price = 120000},
                     }
                 },
 
                 new Ticket
                 {
                     Id = -2,
-
+                    ShowtimeId = -1,
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 4, Price = 10,},
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 5, Price = 10,},
-                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 6 , Price = 10},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 4, Price = 120000,},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 5, Price = 120000,},
+                        new TicketDetail {TicketId = -2, ShowtimeId = -1, SeatNumber = 6 , Price = 120000},
                     }
                 },
 
                 new Ticket
                 {
                     Id = -3,
+                    ShowtimeId = -1,
                     TicketDetails = new List<TicketDetail>()
                     {
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 7, Price = 10,},
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 8, Price = 10,},
-                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9, Price = 10,},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 7, Price = 120000,},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 8, Price = 120000,},
+                        new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9, Price = 120000,},
                     }
                 },
             };

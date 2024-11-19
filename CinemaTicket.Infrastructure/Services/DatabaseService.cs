@@ -20,9 +20,9 @@ namespace CinemaTicket.Infrastructure.Services
         {
             var db = new DatabaseInfo()
             {
-                CanConnect = _context.Database.CanConnect(),
+                CanConnect = await _context.Database.CanConnectAsync(),
                 DatabaseName = _context.Database.GetDbConnection().Database,
-                TableNames = new List<string>()
+                TableNames = new List<string>(),
             };
 
             var tableNames = _context.Model.GetEntityTypes()
@@ -39,7 +39,12 @@ namespace CinemaTicket.Infrastructure.Services
                 db.TableNames.AddRange(tableNames!);
             }
 
-            return await Task.FromResult(db);
+            if (db.CanConnect)
+            {
+                db.IsSeeded = await _context.Movies.AnyAsync();
+            }
+
+            return db;
         }
 
         public async Task<bool> CreateDatabaseAsync()

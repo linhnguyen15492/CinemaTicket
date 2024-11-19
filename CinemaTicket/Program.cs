@@ -15,19 +15,23 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using CinemaTicket.Core.Models;
 using CinemaTicket.Configuration;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
-//var mySqlConnectionStr = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MySQL"));
 
-var databaseSettings = builder.Configuration.GetSection("MySQL").Get<DatabaseSettings>();
 
-var mySqlConnectionStr = $"server={databaseSettings!.Server};port={databaseSettings.Port};database={databaseSettings.Database};user={databaseSettings.User};password={databaseSettings.Password}";
+builder.Services.AddDbContext<CinemaTicketContext>((provider, options) =>
+{
+    var settings = provider.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+    var connectionString = $"server={settings.Server};port={settings.Port};database={settings.Database};user={settings.User};password={settings.Password}";
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 
-builder.Services.AddDbContext<CinemaTicketContext>(options => options.UseMySql(mySqlConnectionStr, ServerVersion.AutoDetect(mySqlConnectionStr)));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<CinemaTicketContext>()
@@ -59,6 +63,7 @@ builder.Services.AddScoped<IAccountService<ApplicationUserDto>, AccountService>(
 builder.Services.AddScoped<IShowtimeService, ShowtimeService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
+builder.Services.AddScoped<ISalesService, SalesService>();
 
 
 

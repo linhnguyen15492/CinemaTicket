@@ -16,5 +16,11 @@ namespace CinemaTicket.Infrastructure.Repositories
         public TicketRepository(CinemaTicketContext context) : base(context)
         {
         }
+
+        public override async Task<IEnumerable<Ticket>> GetAllAsync()
+        {
+
+            return await _dbSet.Include(x => x.TicketDetails).ToListAsync();
+        }
     }
 }

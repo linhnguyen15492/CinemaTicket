@@ -12,52 +12,15 @@
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<div>
+    <h3 class="mb-3">Đồ án cuối kỳ Chuyên đề thiết kế phần mềm nâng cao - HK1 2024-2025</h3>
 
-
-
-
-<div class="row">
-    <div class="card w-50 mb-3 border-info">
-        <div class="card-body">
-            <h5 class="card-title">Thông tin database</h5>
-
-            @if (!Model.CanConnect)
-            {
-                <p>Trạng thái: <span class="text-danger fw-bold">Không thể kết nối</span></p>
-
-            }
-            else
-            {
-                <p>Database name: <span class="text-success fw-bold">@Model.DatabaseName</span></p>
-
-                <p>Trạng thái: <span class="text-success fw-bold">Đã kết nối</span></p>
-
-                <p>Danh sách các bảng:</p>
-                <ul>
-                    @foreach (var table in Model.TableNames!)
-                    {
-                        <li>@table</li>
-                    }
-                </ul>
-            }
-
-
-
-            <a asp-action="CreateDatabase" class="btn btn-primary">Tạo database</a>
-            <a asp-action="DropDatabase" class="btn btn-danger">Xóa database</a>
-            <a asp-action="SeedData" class="btn btn-success">Seed dữ liệu</a>
-        </div>
-    </div>
-
-    <div class="card w-50 mb-3 border-info">
-        <div class="card-body">
-            <h5 class="card-title">Thông tin người dùng</h5>
-
-            <ul>
-                <li>Người dùng: <span class="text-danger fw-bold">@UserService.GetCurrentUser()</span></li>
-                <li>Quyền: <span class="text-danger fw-bold">@UserService.GetRoles()</span></li>
-            </ul>
-        </div>
-    </div>
+    <h6 class="mb-3">Họ tên: Nguyễn Ngọc Hồng Lĩnh</h6>
+    <h6 class="mb-3">MSSV: 22880088</h6>
 </div>
+
+
+
+<p><span class="text-danger fw-bold">Vui lòng xem thông tin kết nối cơ sở dữ liệu ở trang <a class="text-decoration-none" asp-action="Privacy">Privacy</a>.</span></p>
+
 

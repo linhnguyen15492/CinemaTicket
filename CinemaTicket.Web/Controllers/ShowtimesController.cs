@@ -24,7 +24,7 @@ namespace CinemaTicket.Web.Controllers
             _showtimeService = showtimeService;
             _movieService = movieService;
             _theaterService = theaterService;
-            _userService=userService;
+            _userService = userService;
         }
 
         public async Task<IActionResult> Index([FromQuery] DateOnly? searchDate, [FromQuery] string? searchName, [FromQuery] int? scheduleType)
@@ -61,7 +61,7 @@ namespace CinemaTicket.Web.Controllers
                 return RedirectToAction("Index", "Account");
             }
 
-            if (!IsAuthorized("OfficeManager"))
+            if (!IsAuthorized("OfficeManager") && !IsAuthorized("Administrator"))
             {
                 var vm = new ErrorViewModel
                 {

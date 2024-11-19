@@ -5,10 +5,11 @@
 }
 
 
-<div class="card border-success" style="width: 55%;">
+<div class="card border-success" style="width: 75%;">
     <div class="card-body">
         <h5 class="card-title text-success">@Model.Showtime.MovieTitle - Ngày @Model.Showtime.Date - Ca @Model.Showtime.ShowtimeSchedule - Phòng @Model.Showtime.ScreeningRoomType</h5>
-        <p class="card-text fw-bold">Số vé: @ViewData["Tickets"]</p>
+        <p class="card-text fw-bold">Số vé: <span class="text-success">@String.Format("{0:#,##}", @ViewData["Tickets"])</span></p>
+        <p class="card-text fw-bold">Thành tiền: <span class="text-success">@String.Format("{0:#,##}", @ViewData["Amount"])</span></p>
         <form asp-action="checkout" method="post">
             <input type="submit" value="Đặt vé" class="btn btn-primary" />
         </form>
@@ -31,6 +32,7 @@
                 <form asp-action="AddToCart" method="post">
                     <input type="hidden" name="showtimeId" value="@Model.Showtime.Id" />
                     <input type="hidden" name="seatNumber" value="@seat.SeatNumber" />
+                    <input type="hidden" name="price" value="@Model.Showtime.Price" />
 
                     @if (seat.IsReserved)
                     {

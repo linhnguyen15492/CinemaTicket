@@ -68,6 +68,7 @@ namespace CinemaTicket.Web.Controllers
             _cartService.SaveCartSession(ticket);
 
             ViewData["Tickets"] = ticket.TicketDetails.Count;
+            ViewData["Amount"] = ticket.TicketDetails.Sum(t => t.Price);
 
             var showtime = await _showtimeService.GetShowtimeByIdAsync(showtimeId);
 
@@ -78,7 +79,7 @@ namespace CinemaTicket.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToCart(int showtimeId, int seatNumber)
+        public IActionResult AddToCart(int showtimeId, int seatNumber, double price)
         {
             var ticket = _cartService.GetCart();
 
@@ -91,7 +92,13 @@ namespace CinemaTicket.Web.Controllers
                 };
             }
 
-            ticket.TicketDetails.Add(new TicketDetail { SeatNumber = seatNumber, ShowtimeId = showtimeId });
+            var ticketDetail = ticket.TicketDetails.FirstOrDefault(td => td.SeatNumber == seatNumber && td.ShowtimeId == showtimeId);
+
+            if (ticketDetail is null)
+            {
+                // Chưa tồn tại, add vào cart
+                ticket.TicketDetails.Add(new TicketDetail { SeatNumber = seatNumber, ShowtimeId = showtimeId, Price = price });
+            }
 
             _cartService.SaveCartSession(ticket);
 

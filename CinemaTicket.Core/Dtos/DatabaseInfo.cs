@@ -10,6 +10,10 @@ namespace CinemaTicket.Core.Dtos
     {
         public bool CanConnect { get; set; }
         public string DatabaseName { get; set; } = string.Empty;
+        public string Server { get; set; } = string.Empty;
+        public string Port { get; set; } = string.Empty;
+        public string User { get; set; } = string.Empty;
         public List<string>? TableNames { get; set; }
+        public bool IsSeeded { get; set; } 
     }
 }

@@ -1,4 +1,4 @@
-using CinemaTicket.Web.Models;
+﻿using CinemaTicket.Web.Models;
 using CinemaTicket.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -18,14 +18,28 @@ namespace CinemaTicket.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var info = await GetDatabaseInfo();
 
-            return View(info);
+            return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            var info = await GetDatabaseInfo();
+
+            if (info is not null)
+            {
+                return View(info);
+            }
+            else
+            {
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Chưa có kết nối tới server, vui lòng khởi chạy Web API"
+                };
+
+                return View("Error", vm);
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

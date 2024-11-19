@@ -11,5 +11,9 @@ namespace CinemaTicket.Web.Models
         public bool CanConnect { get; set; }
         public string DatabaseName { get; set; } = string.Empty;
         public List<string>? TableNames { get; set; }
+        public string Server { get; set; } = string.Empty;
+        public string Port { get; set; } = string.Empty;
+        public string User { get; set; } = string.Empty;
+        public bool IsSeeded { get; set; }
     }
 }

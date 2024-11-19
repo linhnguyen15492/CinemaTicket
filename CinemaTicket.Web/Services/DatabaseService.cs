@@ -13,19 +13,24 @@ namespace CinemaTicket.Web.Services
         [HttpPost]
         public async Task<bool> CreateDatabseAsync()
         {
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri(BaseUrl);
-            using HttpResponseMessage response = await client.PostAsync("home/db/create-database", null);
-
-            if (response.IsSuccessStatusCode)
+            try
             {
+                using var client = new HttpClient();
+                client.BaseAddress = new Uri(BaseUrl);
+                using HttpResponseMessage response = await client.PostAsync("home/db/create-database", null);
 
-                return true;
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                Console.WriteLine(ex.Message);
             }
+
+            return false;
         }
 
         public async Task<bool> DropDatabseAsync()
@@ -66,18 +71,24 @@ namespace CinemaTicket.Web.Services
         {
             using var client = new HttpClient();
             client.BaseAddress = new Uri(BaseUrl);
-            using HttpResponseMessage response = await client.GetAsync("home/db/info");
 
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var info = await response.Content.ReadFromJsonAsync<DatabaseInfo>();
+                using HttpResponseMessage response = await client.GetAsync("home/db/info");
 
-                return info;
+                if (response.IsSuccessStatusCode)
+                {
+                    var info = await response.Content.ReadFromJsonAsync<DatabaseInfo>();
+
+                    return info;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine(ex.Message);
             }
+
+            return null;
         }
     }
 }

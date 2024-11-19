@@ -1,10 +1,12 @@
-﻿using CinemaTicket.Core.Entities;
+﻿using CinemaTicket.Configuration;
+using CinemaTicket.Core.Entities;
 using CinemaTicket.Core.Interfaces.Services;
 using CinemaTicket.Infrastructure.Context;
 using CinemaTicket.Infrastructure.Services.SeedData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Diagnostics.CodeAnalysis;
 
 namespace CinemaTicket.Controllers
@@ -16,13 +18,15 @@ namespace CinemaTicket.Controllers
         private readonly ISeedDataService _seeder;
         private readonly CinemaTicketContext _context;
         private readonly IDatabaseService _databaseService;
+        private readonly IOptions<DatabaseSettings> _databaseSettings;
 
         public HomeController(CinemaTicketContext context, ISeedDataService seeder, RoleManager<IdentityRole> roleManager,
-            UserManager<ApplicationUser> userManager, IDatabaseService databaseService)
+            UserManager<ApplicationUser> userManager, IDatabaseService databaseService, IOptions<DatabaseSettings> databaseSettings)
         {
             _seeder = new SeedDataService(context, roleManager, userManager);
             _context = context;
-            _databaseService=databaseService;
+            _databaseService = databaseService;
+            _databaseSettings = databaseSettings;
         }
 
         [HttpPost("db/seed")]
@@ -66,6 +70,10 @@ namespace CinemaTicket.Controllers
             try
             {
                 var result = await _databaseService.GetDatabaseInfo();
+
+                result.Server = _databaseSettings.Value.Server;
+                result.Port = _databaseSettings.Value.Port;
+                result.User = _databaseSettings.Value.User;
 
                 return Ok(result);
             }

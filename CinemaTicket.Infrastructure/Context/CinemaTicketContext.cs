@@ -3,16 +3,21 @@ using CinemaTicket.Core.Enums.EnumClasses;
 using CinemaTicket.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace CinemaTicket.Infrastructure.Context
 {
     public class CinemaTicketContext : IdentityDbContext<ApplicationUser>
     {
-        private readonly string _connectionString = "Server=localhost; Port=3306; User ID=root; Password=123456; Database=ticket";
-
-        public CinemaTicketContext(DbContextOptions<CinemaTicketContext> options) : base(options)
+        public bool IsSeeded
         {
+            get
+            {
+                return this.Theaters.Any();
+            }
         }
+
+        public CinemaTicketContext(DbContextOptions<CinemaTicketContext> options) : base(options) { }
 
         public required DbSet<Theater> Theaters { get; set; }
         public required DbSet<Showtime> Showtimes { get; set; }
@@ -27,10 +32,7 @@ namespace CinemaTicket.Infrastructure.Context
         public required DbSet<Seat> Seats { get; set; }
         public required DbSet<TicketDetail> TicketDetails { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
-        }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
