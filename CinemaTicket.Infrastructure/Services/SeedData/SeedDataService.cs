@@ -135,6 +135,9 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                     new Movie { Id = -1, Title = "Chamber Italian", Description = "A Fateful Reflection of a Moose And a Husband who must Overcome a Monkey in Nigeria", StatusId = MovieStatusEnum.NowShowing },
                     new Movie { Id = -2, Title = "Grosse Wonderful", Description = "A Epic Drama of a Cat And a Explorer who must Redeem a Moose in Australia", StatusId = MovieStatusEnum.NowShowing },
                     new Movie { Id = -3, Title = "Airport Pollock", Description = "A Epic Tale of a Moose And a Girl who must Confront a Monkey in Ancient India", StatusId = MovieStatusEnum.NowShowing },
+                    new Movie { Id = -4, Title = "The Godfather", Description = "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", StatusId = MovieStatusEnum.NowShowing },
+                    new Movie { Id = -5, Title = "The Shawshank Redemption", Description = "A banker convicted of uxoricide forms a friendship over a quarter century with a hardened convict, while maintaining his innocence and trying to remain hopeful through simple compassion.", StatusId = MovieStatusEnum.NowShowing },
+                    new Movie { Id = -6, Title = "Schindler's List", Description = "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.", StatusId = MovieStatusEnum.NowShowing },
                 };
 
                 await _context.AddRangeAsync(data);
@@ -160,6 +163,14 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                     new ScreeningRoom { Id = -4, CreatedDate = DateTime.UtcNow, Name = "Phòng A4", TheaterId = -1, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
                     new ScreeningRoom { Id = -5, CreatedDate = DateTime.UtcNow, Name = "Phòng A5", TheaterId = -1, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
                     new ScreeningRoom { Id = -6, CreatedDate = DateTime.UtcNow, Name = "Phòng A6", TheaterId = -1, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
+                    new ScreeningRoom { Id = -7, CreatedDate = DateTime.UtcNow, Name = "Phòng A7", TheaterId = -2, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
+                    new ScreeningRoom { Id = -8, CreatedDate = DateTime.UtcNow, Name = "Phòng A8", TheaterId = -2, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Premium },
+                    new ScreeningRoom { Id = -9, CreatedDate = DateTime.UtcNow, Name = "Phòng A9", TheaterId = -3, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
+                    new ScreeningRoom { Id = -10, CreatedDate = DateTime.UtcNow, Name = "Phòng A10", TheaterId = -3, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Premium },
+                    new ScreeningRoom { Id = -11, CreatedDate = DateTime.UtcNow, Name = "Phòng A11", TheaterId = -4, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
+                    new ScreeningRoom { Id = -12, CreatedDate = DateTime.UtcNow, Name = "Phòng A12", TheaterId = -4, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Premium },
+                    new ScreeningRoom { Id = -13, CreatedDate = DateTime.UtcNow, Name = "Phòng A13", TheaterId = -5, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Deluxe },
+                    new ScreeningRoom { Id = -14, CreatedDate = DateTime.UtcNow, Name = "Phòng A14", TheaterId = -5, ScreeningRoomTypeId = ScreeningRoomTypeEnum.Premium },
 
                 };
 
@@ -182,10 +193,18 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             {
                 var data = new List<Showtime>
                 {
-                    new Showtime { Id = -1, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 1, 18) },
-                    new Showtime { Id = -2, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 1, 18) },
-                    new Showtime { Id = -3, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Evening, Date = new DateOnly(2024, 1, 18) },
-                    new Showtime { Id = -4, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Night, Date = new DateOnly(2024, 1, 18) },
+                    new Showtime { Id = -1, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 18) },
+                    new Showtime { Id = -2, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 18) },
+                    new Showtime { Id = -3, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Evening, Date = new DateOnly(2024, 11, 18) },
+                    new Showtime { Id = -4, MovieId = -1, SccreeningRoomId = -1, ShowtimeScheduleId = ShowtimeScheduleEnum.Night, Date = new DateOnly(2024, 11, 18) },
+                    new Showtime { Id = -5, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -6, MovieId = -2, SccreeningRoomId = -2, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -7, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -8, MovieId = -3, SccreeningRoomId = -3, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -9, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -10, MovieId = -4, SccreeningRoomId = -4, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -11, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Morning, Date = new DateOnly(2024, 11, 19) },
+                    new Showtime { Id = -12, MovieId = -5, SccreeningRoomId = -5, ShowtimeScheduleId = ShowtimeScheduleEnum.Afternoon, Date = new DateOnly(2024, 11, 19) },
                 };
 
 
@@ -367,7 +386,7 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
             await _context.AddRangeAsync(bookings);
             await _context.SaveChangesAsync();
 
-            Messages.Enqueue("Seed data Bookings thành công");
+            Messages.Enqueue("Seed data Tickets thành công");
         }
     }
 }

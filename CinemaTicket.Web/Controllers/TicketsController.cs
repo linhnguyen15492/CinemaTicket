@@ -3,6 +3,7 @@ using CinemaTicket.Web.Models;
 using CinemaTicket.Web.Services;
 using CinemaTicket.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Net.Sockets;
 
 namespace CinemaTicket.Web.Controllers
@@ -27,9 +28,7 @@ namespace CinemaTicket.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int showtimeId)
         {
-            var user = _userService.GetCurrentUser();
-
-            if (user == null)
+            if (!_userService.IsLoggedIn)
             {
                 return RedirectToAction("Index", "Account");
             }
@@ -38,7 +37,15 @@ namespace CinemaTicket.Web.Controllers
 
             if (!roles.Contains("Administrator") && !roles.Contains("TicketSeller"))
             {
-                return Unauthorized("Bạn không có quyền thực hiện!");
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Bạn không có quyền thực hiện yêu cầu này!"
+                };
+
+                return View("Error", vm);
+
+                //return Unauthorized("Bạn không có quyền thực hiện!");
             }
 
 

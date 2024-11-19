@@ -5,24 +5,21 @@
 }
 
 
-<h1>
-    Bán vé
-</h1>
-
-
-<div>
-    Showtime ID : @Model.Showtime.Id
-
-    Ngày: @Model.Showtime.Date
-    Phim: @Model.Showtime.MovieTitle
-    Phòng: @Model.Showtime.ScreeningRoomType
-
-    Số vé: @ViewData["Tickets"]
+<div class="card border-success" style="width: 55%;">
+    <div class="card-body">
+        <h5 class="card-title text-success">@Model.Showtime.MovieTitle - Ngày @Model.Showtime.Date - Ca @Model.Showtime.ShowtimeSchedule - Phòng @Model.Showtime.ScreeningRoomType</h5>
+        <p class="card-text fw-bold">Số vé: @ViewData["Tickets"]</p>
+        <form asp-action="checkout" method="post">
+            <input type="submit" value="Đặt vé" class="btn btn-primary" />
+        </form>
+    </div>
 </div>
 
-<form asp-action="checkout" method="post">
-    <input type="submit" value="Đặt vé" class="btn btn-primary" />
-</form>
+<hr />
+
+<h6>Số ghế trống: @Model.Showtime.Seats?.Where(s => !s.IsReserved).Count()</h6>
+
+<br />
 
 <div class="container text-center">
     <div class="row row-cols-sm-auto">

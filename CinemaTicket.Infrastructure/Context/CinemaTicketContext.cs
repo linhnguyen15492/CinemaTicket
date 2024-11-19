@@ -29,7 +29,7 @@ namespace CinemaTicket.Infrastructure.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
+            //optionsBuilder.UseMySql(_connectionString, ServerVersion.AutoDetect(_connectionString));
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

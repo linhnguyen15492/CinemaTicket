@@ -5,8 +5,12 @@ namespace CinemaTicket.Core.Dtos
     public class ShowtimeDto : BaseDto
     {
         public DateOnly Date { get; set; }
+
         public int SccreeningRoomId { get; set; }
+
         public string ScreeningRoomType { get; set; } = string.Empty;
+
+        public string ScreeningRoomName { get; set; } = string.Empty;
 
         public int ShowtimeScheduleId { get; set; }
 

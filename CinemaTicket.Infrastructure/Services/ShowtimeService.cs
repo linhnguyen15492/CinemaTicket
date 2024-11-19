@@ -148,7 +148,9 @@ namespace CinemaTicket.Infrastructure.Services
                                                .Where(s => s.Id == id)
                                                     .Include(s => s.Movie)
                                                     .Include(s => s.ScreeningRoom)
-                                                        .ThenInclude(r => r.ScreeningRoomType)
+                                                        .ThenInclude(r => r!.ScreeningRoomType)
+                                                    .Include(s => s.ScreeningRoom)
+                                                        .ThenInclude(r => r!.Theater)
                                                     .Include(s => s.ShowtimeSchedule)
                                                     .Include(s => s.Seats)
                                                .FirstOrDefaultAsync();

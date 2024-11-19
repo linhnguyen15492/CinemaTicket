@@ -1,0 +1,25 @@
+﻿@model Showtime
+
+
+
+<div class="card border-info mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="..." class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.MovieTitle</h5>
+                <p class="card-text">Ngày: @Model.Date</p>
+                <p class="card-text">Rạp: @Model.TheaterName</p>
+                <p class="card-text">Phòng: @Model.ScreeningRoomType</p>
+                <p class="card-text">Ca: @Model.ShowtimeSchedule</p>
+                <p class="card-text"><small class="text-body-secondary">@Model.Price</small></p>
+
+                <a asp-action="Index" asp-route-showtimeId="@Model.Id" asp-controller="Tickets" class="btn btn-info">
+                    Bán vé
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,27 +2,15 @@
 
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Danh sách phim";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
-<p>
-    <a class="btn btn-success" asp-action="Create">Create New</a>
-</p>
 
-@* <form asp-controller="Movies" asp-action="Index" method="get"> *@
-@*     <p> *@
+<a class="btn btn-success justify-content-end" asp-action="Create">Tạo mới</a>
 
-@*         <select asp-for="MovieGenre" asp-items="Model.Genres"> *@
-@*             <option value="">All</option> *@
-@*         </select> *@
-
-@*         Title: <input type="text" asp-for="SearchString" /> *@
-@*         <input type="submit" value="Filter" /> *@
-@*     </p> *@
-@* </form> *@
 
 
 <table class="table">
@@ -60,9 +48,8 @@
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
-                    <a asp-controller="Showtimes" asp-action="Detail" asp-route-id="@item.Id">Xem lịch chiếu</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Chi tiết</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Xóa</a>
+                    <a class="btn-sm btn-primary text-decoration-none" asp-controller="Showtimes" asp-action="Index" asp-route-searchName="@item.Title">Xem lịch chiếu</a>
+                    <a class="btn-sm btn-secondary text-decoration-none" asp-action="Details" asp-route-id="@item.Id">Chi tiết</a>
                 </td>
             </tr>
         }

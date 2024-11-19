@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace CinemaTicket.Web.Controllers
 {
@@ -15,12 +16,15 @@ namespace CinemaTicket.Web.Controllers
         private readonly ShowtimeService _showtimeService;
         private readonly MovieService _movieService;
         private readonly TheaterService _theaterService;
+        private readonly UserService _userService;
 
-        public ShowtimesController(ShowtimeService showtimeService, MovieService movieService, TheaterService theaterService)
+        public ShowtimesController(ShowtimeService showtimeService, MovieService movieService,
+            TheaterService theaterService, UserService userService)
         {
             _showtimeService = showtimeService;
             _movieService = movieService;
             _theaterService = theaterService;
+            _userService=userService;
         }
 
         public async Task<IActionResult> Index([FromQuery] DateOnly? searchDate, [FromQuery] string? searchName, [FromQuery] int? scheduleType)
@@ -52,12 +56,27 @@ namespace CinemaTicket.Web.Controllers
 
         public async Task<IActionResult> ChooseTheater()
         {
+            if (!_userService.IsLoggedIn)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            if (!IsAuthorized("OfficeManager"))
+            {
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Bạn không có quyền thực hiện yêu cầu này!"
+                };
+
+                return View("Error", vm);
+            }
+
             var theaters = await _theaterService.GetAllAsync();
 
             ViewData["Theaters"] = new SelectList(theaters, "Id", "Name");
             return View();
         }
-
 
         [HttpGet]
         public async Task<IActionResult> Create([FromQuery] int theaterId)
@@ -104,9 +123,20 @@ namespace CinemaTicket.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await _showtimeService.AddAsync(CreateShowtimeDto);
+                    var res = await _showtimeService.AddAsync(CreateShowtimeDto);
 
-                    return RedirectToAction(nameof(Index));
+                    if (res is not null)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
+                    {
+                        return View("Error", new ErrorViewModel
+                        {
+                            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                            Message = "Có lỗi xảy ra khi thêm suất chiếu!"
+                        });
+                    }
                 }
             }
             catch (DbUpdateException /* ex */)
@@ -116,6 +146,7 @@ namespace CinemaTicket.Web.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
+
 
             return View(CreateShowtimeDto);
         }
@@ -134,6 +165,30 @@ namespace CinemaTicket.Web.Controllers
             }
 
             return scheduleTypes;
+        }
+
+        private bool IsAuthorized(string role)
+        {
+            return _userService.GetRoles().Contains(role);
+        }
+
+        [HttpGet]
+        [Route("Showtimes/Details/{id}")]
+        public async Task<IActionResult> Details(int id)
+        {
+            var showtime = await _showtimeService.GetShowtimeByIdAsync(id);
+            if (showtime is null)
+            {
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Không tìm thấy suất chiếu này!"
+                };
+
+                return View("Error", vm);
+            }
+
+            return View(showtime);
         }
     }
 }

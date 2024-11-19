@@ -12,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<MovieService>(provider => new MovieService(baseUrl));
 builder.Services.AddScoped<ShowtimeService>(provider => new ShowtimeService(baseUrl));
 builder.Services.AddScoped<TheaterService>(provider => new TheaterService(baseUrl));
+builder.Services.AddScoped<DatabaseService>(provider => new DatabaseService(baseUrl));
 builder.Services.AddScoped<TicketService>(provider =>
 {
     return new TicketService(baseUrl, provider.GetRequiredService<UserService>());

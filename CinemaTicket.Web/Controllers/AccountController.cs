@@ -60,7 +60,6 @@ namespace CinemaTicket.Web.Controllers
             // Lấy danh sách roles từ claim "roles"
             var roles = jwt.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToArray();
 
-
             // Lưu thông tin vào vào session
             HttpContext.Session.SetString("accessToken", accessToken);
             HttpContext.Session.SetString("username", loginModel.Username);

@@ -4,6 +4,7 @@
     public class UserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        public bool IsLoggedIn => !string.IsNullOrEmpty(GetCurrentToken());
 
         public UserService(IHttpContextAccessor httpContextAccessor)
         {

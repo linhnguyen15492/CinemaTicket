@@ -13,6 +13,7 @@ namespace CinemaTicket.Core.Mappers
                 Id = showtime.Id,
                 Date = showtime.Date,
                 SccreeningRoomId = showtime.SccreeningRoomId,
+                ScreeningRoomName = showtime.ScreeningRoom!.Name,
                 ScreeningRoomType = showtime.ScreeningRoom?.ScreeningRoomType?.Name!,
                 ShowtimeScheduleId = (int)showtime.ShowtimeScheduleId,
                 ShowtimeSchedule = showtime.ShowtimeSchedule?.Description!,

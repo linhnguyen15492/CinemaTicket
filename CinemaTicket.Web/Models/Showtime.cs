@@ -9,6 +9,9 @@ namespace CinemaTicket.Web.Models
 
         public int SccreeningRoomId { get; set; }
 
+        [Display(Name = "Tên phòng")]
+        public string ScreeningRoomName { get; set; } = string.Empty;
+
         [Display(Name = "Loại phòng")]
         public string ScreeningRoomType { get; set; } = string.Empty;
 
