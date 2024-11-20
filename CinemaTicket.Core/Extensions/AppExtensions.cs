@@ -28,15 +28,15 @@ namespace CinemaTicket.Core.Extensions
         public static void SeedEnum(this ModelBuilder modelBuilder)
         {
             // to populate enum
-            foreach (var e in Enum.GetValues(typeof(BookingStatusEnum)).Cast<BookingStatusEnum>())
-            {
-                modelBuilder.Entity<BookingStatus>().HasData(new BookingStatus
-                {
-                    Id = e,
-                    Name = e.ToString(),
-                    Description = e.GetEnumDescription()
-                });
-            }
+            //foreach (var e in Enum.GetValues(typeof(BookingStatusEnum)).Cast<BookingStatusEnum>())
+            //{
+            //    modelBuilder.Entity<BookingStatus>().HasData(new BookingStatus
+            //    {
+            //        Id = e,
+            //        Name = e.ToString(),
+            //        Description = e.GetEnumDescription()
+            //    });
+            //}
 
             // to populate enum
             foreach (var e in Enum.GetValues(typeof(MovieStatusEnum)).Cast<MovieStatusEnum>())

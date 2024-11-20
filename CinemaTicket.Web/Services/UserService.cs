@@ -48,5 +48,10 @@
         {
             return _httpContextAccessor.HttpContext.Session.GetString("Roles");
         }
+
+        public bool IsAuthorized(string role)
+        {
+            return GetRoles().Contains(role);
+        }
     }
 }

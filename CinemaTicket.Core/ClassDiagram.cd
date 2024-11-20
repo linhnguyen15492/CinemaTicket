@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CinemaTicket.Core.Entities.ApplicationUser">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAUAAAwAAAAAAAEAQAEAAAAAAAAgAAAQIAAAA=</HashCode>
+      <FileName>Entities\ApplicationUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.BaseEntity">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAQIAAAA=</HashCode>
+      <FileName>Entities\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.Movie">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <AssociationLine Name="Showtimes" Type="CinemaTicket.Core.Entities.Showtime" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.938" Y="2.502" />
+        <Point X="8.938" Y="5.25" />
+        <Point X="6.75" Y="5.25" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAANAAAgAEAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Movie.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Showtimes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.ScreeningRoom">
+    <Position X="9.5" Y="4.5" Width="2.25" />
+    <InheritanceLine Type="CinemaTicket.Core.Entities.BaseEntity" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="6" Y="2.18" />
+        <Point X="6" Y="3.948" />
+        <Point X="7.042" Y="3.948" Type="JumpStart" />
+        <Point X="7.208" Y="3.948" Type="JumpEnd" />
+        <Point X="8.854" Y="3.948" Type="JumpStart" />
+        <Point X="9.021" Y="3.948" Type="JumpEnd" />
+        <Point X="10.625" Y="3.948" />
+        <Point X="10.625" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAEAAAAAAAAAQCAAAAAAAAAAABgAAAAAA=</HashCode>
+      <FileName>Entities\ScreeningRoom.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Theater" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.Seat">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <AssociationLine Name="Showtime" Type="CinemaTicket.Core.Entities.Showtime" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="9.562" Y="7.25" />
+        <Point X="9.562" Y="6.764" />
+        <Point X="6.75" Y="6.764" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAEAAAAAAAAAAAAAAIAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Seat.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Showtime" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.Showtime">
+    <Position X="4.5" Y="4.5" Width="2.25" />
+    <InheritanceLine Type="CinemaTicket.Core.Entities.BaseEntity" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="2.18" />
+        <Point X="5.5" Y="4.5" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Seats" Type="CinemaTicket.Core.Entities.Seat" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.625" Y="6.887" />
+        <Point X="5.625" Y="7.5" />
+        <Point X="8.5" Y="7.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Movie" Type="CinemaTicket.Core.Entities.Movie" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.75" Y="4.812" />
+        <Point X="7.125" Y="4.812" />
+        <Point X="7.125" Y="2.439" />
+        <Point X="8.5" Y="2.439" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAFAAAAgACACAACQAAAAABAAAAAIAAAAA=</HashCode>
+      <FileName>Entities\Showtime.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ScreeningRoom" />
+      <Property Name="Movie" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="TicketDetails" />
+      <Property Name="Seats" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.Theater">
+    <Position X="13.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="CinemaTicket.Core.Entities.BaseEntity" ManuallyRouted="true" FixedFromPoint="true">
+      <Path>
+        <Point X="6.25" Y="2.18" />
+        <Point X="6.25" Y="3.654" />
+        <Point X="7.042" Y="3.654" Type="JumpStart" />
+        <Point X="7.208" Y="3.654" Type="JumpEnd" />
+        <Point X="8.854" Y="3.654" Type="JumpStart" />
+        <Point X="9.021" Y="3.654" Type="JumpEnd" />
+        <Point X="14.25" Y="3.654" />
+        <Point X="14.25" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAABIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Theater.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="ScreeningRooms" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.Ticket">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Ticket.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="TicketDetails" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.TicketDetail">
+    <Position X="0.75" Y="4.25" Width="1.5" />
+    <InheritanceLine Type="CinemaTicket.Core.Entities.BaseEntity" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.125" Y="2.18" />
+        <Point X="5.125" Y="3.875" />
+        <Point X="2.25" Y="3.875" />
+        <Point X="2.25" Y="4.25" />
+      </Path>
+    </InheritanceLine>
+    <AssociationLine Name="Ticket" Type="CinemaTicket.Core.Entities.Ticket" FixedToPoint="true">
+      <Path>
+        <Point X="1.875" Y="4.25" />
+        <Point X="1.875" Y="1.733" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Seat" Type="CinemaTicket.Core.Entities.Seat" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.5" Y="6.06" />
+        <Point X="1.5" Y="8.312" />
+        <Point X="8.5" Y="8.312" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAQAAAAACAAAAQAAAAAIAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\TicketDetail.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Ticket" />
+      <Property Name="Showtime" />
+      <Property Name="Seat" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="CinemaTicket.Core.Entities.UserRoles">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAAAAAACAAAAAAEAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\UserRoles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

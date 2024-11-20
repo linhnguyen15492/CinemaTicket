@@ -7,7 +7,10 @@
 
 <div class="card border-success" style="width: 75%;">
     <div class="card-body">
-        <h5 class="card-title text-success">@Model.Showtime.MovieTitle - Ngày @Model.Showtime.Date - Ca @Model.Showtime.ShowtimeSchedule - Phòng @Model.Showtime.ScreeningRoomType</h5>
+        <h5 class="card-title text-success">
+            @Model.Showtime.MovieTitle - Ngày @Model.Showtime.Date - Ca @Model.Showtime.ShowtimeSchedule
+            - Phòng @Model.Showtime.ScreeningRoomType - Rạp @Model.Showtime.TheaterName
+        </h5>
         <p class="card-text fw-bold">Số vé: <span class="text-success">@String.Format("{0:#,##}", @ViewData["Tickets"])</span></p>
         <p class="card-text fw-bold">Thành tiền: <span class="text-success">@String.Format("{0:#,##}", @ViewData["Amount"])</span></p>
         <form asp-action="checkout" method="post">

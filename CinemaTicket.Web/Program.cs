@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var baseUrl = "http://localhost:5073/api/";
+string baseUrl = builder.Configuration.GetSection("API_URL").Value!;
+
+//var baseUrl = "http://localhost:5073/api/";
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

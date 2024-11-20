@@ -186,5 +186,35 @@ namespace CinemaTicket.Web.Controllers
 
             return RedirectToAction(nameof(Ticket), new { success = false });
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetSalesStatistics()
+        {
+            if (!_userService.IsLoggedIn)
+            {
+                return RedirectToAction("Index", "Account");
+            }
+
+            if (!_userService.IsAuthorized("OfficeManager") && !_userService.IsAuthorized("Administrator"))
+            {
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Bạn không có quyền thực hiện yêu cầu này!"
+                };
+
+                return View("Error", vm);
+            }
+
+            var res = await _ticketService.GetSalesByMovieAsync();
+            if (res is not null)
+            {
+                return View("SalesSummary", res);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

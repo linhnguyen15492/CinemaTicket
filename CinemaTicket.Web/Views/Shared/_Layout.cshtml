@@ -41,6 +41,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Showtimes" asp-action="Index">Lịch chiếu</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tickets" asp-action="GetSalesStatistics">Thống kê</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @if (UserService.GetCurrentToken() == null)

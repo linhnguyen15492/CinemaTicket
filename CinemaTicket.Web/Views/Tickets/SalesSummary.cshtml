@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SalesByMovie>
+
+@{
+    ViewData["Title"] = "Sales Summary";
+
+    int count = 0;
+}
+
+<h1>Thống kê doanh thu</h1>
+
+<div class="justify-content-center">
+
+    <table class="table table-hover">
+        <thead>
+            <tr class="text-center fw-bold">
+                <th scope="col" class="w-auto">STT</th>
+                <th scope="col" class="w-50">Tên phim</th>
+                <th scope="col" class="w-auto">Sản lượng (vé)</th>
+                <th scope="col" class="w-25">Doanh thu</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th class="text-center" scope="row">@(++count)</th>
+                    <td>@item.Movie</td>
+                    <td class="text-end">@item.Count</td>
+                    <td class="text-end">@String.Format("{0:#,##}", @item.Sales)</td>
+                </tr>
+            }
+
+
+            <tr class="border-top-0 fw-bold alert alert-info">
+                <th scope="row"></th>
+                <td></td>
+                <td class="text-end">@String.Format("{0:#,##}", @Model.Sum(s => s.Count))</td>
+                <td class="text-end">@String.Format("{0:#,##}", @Model.Sum(s => s.Sales))</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+</div>
+

@@ -384,6 +384,36 @@ namespace CinemaTicket.Infrastructure.Services.SeedData
                         new TicketDetail {TicketId = -3, ShowtimeId = -1, SeatNumber = 9, Price = 120000,},
                     }
                 },
+
+                new Ticket
+                {
+                    Id = -4,
+                    ShowtimeId = -5,
+                    TicketDetails = new List<TicketDetail>()
+                    {
+                        new TicketDetail {TicketId = -4, ShowtimeId = -5, SeatNumber = 1, Price = 100000,},
+                    }
+                },
+
+                new Ticket
+                {
+                    Id = -5,
+                    ShowtimeId = -7,
+                    TicketDetails = new List<TicketDetail>()
+                    {
+                        new TicketDetail {TicketId = -5, ShowtimeId = -7, SeatNumber = 2, Price = 100000,},
+                    }
+                },
+
+                new Ticket
+                {
+                    Id = -6,
+                    ShowtimeId = -9,
+                    TicketDetails = new List<TicketDetail>()
+                    {
+                        new TicketDetail {TicketId = -6, ShowtimeId = -9, SeatNumber = 3, Price = 80000,},
+                    }
+                },
             };
 
             await _context.AddRangeAsync(bookings);

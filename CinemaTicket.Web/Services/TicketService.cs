@@ -33,5 +33,27 @@ namespace CinemaTicket.Web.Services
 
             return null;
         }
+
+
+        public async Task<IEnumerable<SalesByMovie>?> GetSalesByMovieAsync()
+        {
+            var token = _userService.GetCurrentToken();
+
+            using var client = new HttpClient();
+            client.BaseAddress = new Uri(BaseUrl);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+            using HttpResponseMessage response = await client.GetAsync("tickets/sales-by-movie");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var res = await response.Content.ReadFromJsonAsync<IEnumerable<SalesByMovie>>();
+
+                return res;
+            }
+
+            return null;
+        }
+
     }
 }

@@ -18,5 +18,7 @@ namespace CinemaTicket.Core.Entities
         public MovieStatusEnum StatusId { get; set; }
         [ForeignKey("StatusId")]
         public MovieStatus Status { get; set; } = default!;
+
+        public ICollection<Showtime> Showtimes { get; set; } = default!;
     }
 }
