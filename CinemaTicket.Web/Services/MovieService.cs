@@ -26,5 +26,21 @@ namespace CinemaTicket.Web.Services
                 return null;
             }
         }
+
+        public async Task<Movie?> GetByIdAsync(int id)
+        {
+            using var client = new HttpClient();
+            client.BaseAddress = new Uri(BaseUrl);
+            HttpResponseMessage response = await client.GetAsync($"movies/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                var movie = await response.Content.ReadFromJsonAsync<Movie>();
+                return movie;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

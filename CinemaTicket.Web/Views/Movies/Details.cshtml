@@ -1,0 +1,42 @@
+﻿@model Movie
+
+@{
+    ViewBag.Title = "Thông tin phim";
+}
+
+
+<div class="card border border-info mb-3 w-100">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="~/images/phim1.jpg" class="img-fluid rounded-start" alt="img">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Title</h5>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Genre)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Genre)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

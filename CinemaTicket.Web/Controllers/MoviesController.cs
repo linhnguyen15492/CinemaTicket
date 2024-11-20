@@ -1,6 +1,7 @@
 ﻿using CinemaTicket.Web.Models;
 using CinemaTicket.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.IO;
 
 namespace CinemaTicket.Web.Controllers
@@ -21,41 +22,23 @@ namespace CinemaTicket.Web.Controllers
             return View(movies);
         }
 
-        //GET: Movies/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var movie = await _service.
-
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (movie == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(movie);
-        //}
-
-        public async Task<IEnumerable<Movie>?> GetAllAsync()
+        public async Task<IActionResult> Details(int id)
         {
-            using var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5073/api/");
+            var movie = await _service.GetByIdAsync(id);
 
-            HttpResponseMessage response = await client.GetAsync("movies");
-
-            if (response.IsSuccessStatusCode)
+            if (movie == null)
             {
-                var movies = await response.Content.ReadFromJsonAsync<IEnumerable<Movie>>();
+                var vm = new ErrorViewModel
+                {
+                    RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                    Message = "Có lỗi xảy ra!"
+                };
 
-                return movies;
+                return View("Error", vm);
             }
             else
             {
-                return null;
+                return View(movie);
             }
         }
     }

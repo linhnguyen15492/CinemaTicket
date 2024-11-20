@@ -2,19 +2,49 @@
 
 
 
-<div class="card border-info mb-3" style="max-width: 540px;">
+<div class="card border-info mb-3 w-75">
     <div class="row g-0">
         <div class="col-md-4">
-            <img src="..." class="img-fluid rounded-start" alt="...">
+            <img src="~/images/phim2.jpg" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-8">
             <div class="card-body">
                 <h5 class="card-title">@Model.MovieTitle</h5>
-                <p class="card-text">Ngày: @Model.Date</p>
-                <p class="card-text">Rạp: @Model.TheaterName</p>
-                <p class="card-text">Phòng: @Model.ScreeningRoomType</p>
-                <p class="card-text">Ca: @Model.ShowtimeSchedule</p>
-                <p class="card-text"><small class="text-body-secondary">@Model.Price</small></p>
+                <div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Date)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Date)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TheaterName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TheaterName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ScreeningRoomType)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ScreeningRoomType)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ShowtimeSchedule)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ShowtimeSchedule)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </dt>
+                        <dd>
+                            @String.Format("{0:0,0}", Model.Price)
+                        </dd>
+                    </dl>
+                </div>
 
                 <a asp-action="Index" asp-route-showtimeId="@Model.Id" asp-controller="Tickets" class="btn btn-info">
                     Bán vé
