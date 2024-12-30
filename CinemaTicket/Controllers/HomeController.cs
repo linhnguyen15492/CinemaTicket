@@ -73,7 +73,7 @@ namespace CinemaTicket.Controllers
 
                 result.Server = _databaseSettings.Value.Server;
                 result.Port = _databaseSettings.Value.Port;
-                result.User = _databaseSettings.Value.User;
+                result.User = _databaseSettings.Value.Username;
 
                 return Ok(result);
             }

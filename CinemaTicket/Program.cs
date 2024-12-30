@@ -22,14 +22,22 @@ var builder = WebApplication.CreateBuilder(args);
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 // Add services to the container.
-builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("MySQL"));
+//builder.Services.Configure<MySqlSettings>(builder.Configuration.GetSection("MySQL"));
+builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("PostgreSQL"));
 
+
+//builder.Services.AddDbContext<CinemaTicketContext>((provider, options) =>
+//{
+//    var settings = provider.GetRequiredService<IOptions<MySqlSettings>>().Value;
+//    var connectionString = $"server={settings.Server};port={settings.Port};database={settings.Database};user={settings.Username};password={settings.Password}";
+//    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+//});
 
 builder.Services.AddDbContext<CinemaTicketContext>((provider, options) =>
 {
     var settings = provider.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-    var connectionString = $"server={settings.Server};port={settings.Port};database={settings.Database};user={settings.User};password={settings.Password}";
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    var connectionString = $"Host={settings.Server};Port={settings.Port};Database={settings.Database};Username={settings.Username};Password={settings.Password}";
+    options.UseNpgsql(connectionString);
 });
 
 

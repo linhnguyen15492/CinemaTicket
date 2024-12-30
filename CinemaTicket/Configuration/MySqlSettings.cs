@@ -1,6 +1,6 @@
 ﻿namespace CinemaTicket.Configuration
 {
-    public class DatabaseSettings
+    public class MySqlSettings
     {
         public string Server { get; set; } = string.Empty;
         public string Port { get; set; } = string.Empty;
