@@ -8,7 +8,7 @@ namespace CinemaTicket.Web.Services
 
         public MovieService(string baseUrl)
         {
-            BaseUrl=baseUrl;
+            BaseUrl = baseUrl;
         }
 
         public async Task<IEnumerable<Movie>?> GetAllAsync()

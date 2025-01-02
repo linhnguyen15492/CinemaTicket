@@ -1,9 +1,10 @@
-﻿using CinemaTicket.Web.Models;
+﻿using CinemaTicket.Web.Interfaces;
+using CinemaTicket.Web.Models;
 using Newtonsoft.Json;
 
 namespace CinemaTicket.Web.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         // Key lưu chuỗi json của Cart
         public const string CARTKEY = "cart";

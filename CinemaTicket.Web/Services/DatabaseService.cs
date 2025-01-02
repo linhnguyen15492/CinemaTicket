@@ -1,9 +1,10 @@
-﻿using CinemaTicket.Web.Models;
+﻿using CinemaTicket.Web.Interfaces;
+using CinemaTicket.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaTicket.Web.Services
 {
-    public class DatabaseService : BaseService
+    public class DatabaseService : BaseService, IDatabaseService
     {
         public DatabaseService(string baseUrl)
         {

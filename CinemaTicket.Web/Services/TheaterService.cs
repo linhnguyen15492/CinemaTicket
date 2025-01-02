@@ -1,8 +1,9 @@
-﻿using CinemaTicket.Web.Models;
+﻿using CinemaTicket.Web.Interfaces;
+using CinemaTicket.Web.Models;
 
 namespace CinemaTicket.Web.Services
 {
-    public class TheaterService : BaseService
+    public class TheaterService : BaseService, ITheaterService
     {
         public TheaterService(string baseUrl)
         {

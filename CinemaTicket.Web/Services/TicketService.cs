@@ -1,10 +1,11 @@
-﻿using CinemaTicket.Web.Models;
+﻿using CinemaTicket.Web.Interfaces;
+using CinemaTicket.Web.Models;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 
 namespace CinemaTicket.Web.Services
 {
-    public class TicketService : BaseService
+    public class TicketService : BaseService, ITicketService
     {
         private readonly UserService _userService;
 

@@ -1,7 +1,9 @@
-﻿namespace CinemaTicket.Web.Services
+﻿using CinemaTicket.Web.Interfaces;
+
+namespace CinemaTicket.Web.Services
 {
     // Tạo một lớp service để quản lý thông tin người dùng
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         public bool IsLoggedIn => !string.IsNullOrEmpty(GetCurrentToken());

@@ -11,24 +11,22 @@ string baseUrl = builder.Configuration.GetSection("API_URL").Value!;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<MovieService>(provider => new MovieService(baseUrl));
-builder.Services.AddScoped<ShowtimeService>(provider => new ShowtimeService(baseUrl));
-builder.Services.AddScoped<TheaterService>(provider => new TheaterService(baseUrl));
-builder.Services.AddScoped<DatabaseService>(provider => new DatabaseService(baseUrl));
-builder.Services.AddScoped<TicketService>(provider =>
+builder.Services.AddTransient<IMovieService, MovieService>(provider => new MovieService(baseUrl));
+builder.Services.AddTransient<IShowtimeService, ShowtimeService>(provider => new ShowtimeService(baseUrl));
+builder.Services.AddTransient<ITheaterService, TheaterService>(provider => new TheaterService(baseUrl));
+builder.Services.AddTransient<IDatabaseService, DatabaseService>(provider => new DatabaseService(baseUrl));
+builder.Services.AddTransient<ITicketService, TicketService>(provider =>
 {
     return new TicketService(baseUrl, provider.GetRequiredService<UserService>());
 });
-
+builder.Services.AddTransient<ICartService, CartService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddTransient<CartService>();
-builder.Services.AddTransient<UserService>();
-
 
 builder.Services.AddHttpClient();
 
-builder.Services.AddDistributedMemoryCache();           // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+builder.Services.AddDistributedMemoryCache();   // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
 
 builder.Services.AddSession(cfg =>
 {                    // Đăng ký dịch vụ Session
